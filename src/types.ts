@@ -1,6 +1,7 @@
 export type Handler = (() => Promise<void>) | (() => void) | null;
 
 export type WizardProps = {
+  header?: React.ReactNode;
   footer?: React.ReactNode;
 };
 
