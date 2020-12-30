@@ -50,6 +50,7 @@
     "@size-limit/preset-small-lib": "^4.9.1",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
     "husky": "^4.3.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
