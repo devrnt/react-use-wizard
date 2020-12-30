@@ -1,0 +1,42 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  text-align: center;
+}
+
+div.info {
+  margin-top: 1rem;
+  line-height: 1.8rem;
+}
+
+div.active-step {
+  border: 0.15em solid #cccccc;
+  padding: 3rem 0;
+  margin: 1rem 0;
+  background: #f0f0f0;
+  border-radius: 4px;
+}
+
+button {
+  display: inline-block;
+  padding: 0.2em 1.45em;
+  margin: 0.1em;
+  margin-top: 2rem;
+  border: 0.15em solid #cccccc;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Segoe UI", "Roboto", sans-serif;
+  font-weight: 400;
+  color: #000000;
+  background-color: #cccccc;
+  text-align: center;
+  position: relative;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: initial;
+}
