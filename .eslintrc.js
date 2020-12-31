@@ -4,8 +4,9 @@ module.exports = {
     'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
     'plugin:jsdoc/recommended',
+    'plugin:promise/recommended',
   ],
-  plugins: ['simple-import-sort', 'jsdoc'],
+  plugins: ['simple-import-sort', 'jsdoc', 'promise'],
   settings: {
     react: {
       version: 'detect',
