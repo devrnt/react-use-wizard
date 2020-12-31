@@ -29,12 +29,6 @@
       "pre-commit": "tsdx lint"
     }
   },
-  "prettier": {
-    "printWidth": 80,
-    "semi": true,
-    "singleQuote": true,
-    "trailingComma": "es5"
-  },
   "name": "react-use-wizard",
   "author": "devrnt",
   "module": "dist/react-use-wizard.esm.js",
