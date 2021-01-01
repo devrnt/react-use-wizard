@@ -17,13 +17,13 @@ const Wizard: React.FC<WizardProps> = React.memo(
 
     const goToNextStep = React.useCallback(() => {
       if (hasNextStep.current) {
-        setActiveStep(activeStep => activeStep + 1);
+        setActiveStep((activeStep) => activeStep + 1);
       }
     }, []);
 
     const previousStep = React.useCallback(() => {
       if (hasPreviousStep.current) {
-        setActiveStep(prev => prev - 1);
+        setActiveStep((prev) => prev - 1);
       }
     }, [setActiveStep]);
 
@@ -58,12 +58,12 @@ const Wizard: React.FC<WizardProps> = React.memo(
         isFirstStep: Boolean(!hasPreviousStep.current),
         isLastStep: Boolean(!hasNextStep.current),
       }),
-      [doNextStep, previousStep, isLoading, handleStep, activeStep]
+      [doNextStep, previousStep, isLoading, handleStep, activeStep],
     );
 
     const activeStepContent = React.useMemo(
       () => React.Children.toArray(children)[activeStep],
-      [activeStep, children]
+      [activeStep, children],
     );
 
     return (
@@ -75,7 +75,7 @@ const Wizard: React.FC<WizardProps> = React.memo(
         </>
       </WizardContext.Provider>
     );
-  }
+  },
 );
 
 export default Wizard;
