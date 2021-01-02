@@ -1,4 +1,4 @@
-<p align="center"><img src="https://raw.githubusercontent.com/devrnt/react-use-wizard/master/assets/logo.svg" alt="react-use-wizard logo" height="120px" style="margin-top: 20px;"/></p>
+<p align="center"><img src="https://raw.githubusercontent.com/devrnt/react-use-wizard/docs/readme/assets/logo.svg" alt="react-use-wizard logo" height="120px" style="margin-top: 20px;"/></p>
 <h1 align="center">react-use-wizard</h1>
 <p align="center">A React wizard (stepper) builder without the hassle, powered by hooks.</p>
 
@@ -32,7 +32,7 @@ import * as React from 'react';
 import { Wizard } from 'react-use-wizard';
 
 const App = () => (
-  <Wizard footer={<Footer />} header={<Header />}>
+  <Wizard>
     <Step1 />
     <Step2 />
     <Step3 />
@@ -40,14 +40,19 @@ const App = () => (
 );
 
 const Step1 = () => {
-  const { isLoading, handleStep } = useWizard();
+  const { handleStep, previousStep, nextStep } = useWizard();
 
   // Attach a handler
   handleStep(() => {
     alert('Going to step 2');
   });
 
-  return <button onClick={boot}>Next 🧙</button>;
+  return (
+      <>
+        <button onClick={previousStep}>Previous ⏮️</button>
+        <button onClick={nextStep}>Next ⏭</button>
+      </>
+    );
 };
 ```
 
