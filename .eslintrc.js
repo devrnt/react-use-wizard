@@ -15,6 +15,7 @@ module.exports = {
   rules: {
     'simple-import-sort/imports': 'error',
     'sort-imports': 'off',
-    'import/order': 'off'
+    'import/order': 'off',
+    'jsdoc/require-param-type': 'off',
   }
 };
