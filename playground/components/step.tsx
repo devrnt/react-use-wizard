@@ -1,33 +1,43 @@
 import * as React from 'react';
+import styled from 'styled-components';
 
 import { useWizard } from '../../dist';
 
 type Props = {
   number: number;
+  withCallback?: boolean;
 };
 
-const Step: React.FC<Props> = React.memo(({ number }) => {
+const Container = styled('div')`
+  background: var(--step);
+  border: 1px solid #250b46;
+  border-radius: 2px;
+  padding: 2.75rem 0.35rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 15vh;
+  justify-content: center;
+  align-items: center;
+`;
+
+const P = styled.p`
+  color: white;
+`;
+
+const Step: React.FC<Props> = React.memo(({ number, withCallback = true }) => {
   const { isLoading, handleStep } = useWizard();
 
-  handleStep(() => {
-    alert('Going to next step');
-  });
+  if (withCallback) {
+    handleStep(() => {
+      alert('Going to next step');
+    });
+  }
 
   return (
-    <div
-      style={{
-        border: '1px solid grey',
-        minHeight: '20vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'column',
-      }}
-    >
-      <code>Sync</code>
-      <p>Step {number}</p>
-      {isLoading && <p>loading...</p>}
-    </div>
+    <Container>
+      <P>(Sync) Step {number}</P>
+      {isLoading && <P>Loading...</P>}
+    </Container>
   );
 });
 
