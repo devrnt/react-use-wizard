@@ -1,8 +1,20 @@
 {
+  "name": "react-use-wizard",
+  "author": "devrnt <me@jonasdevrient.be>",
+  "description": "React wizard (stepper) builder without the hassle, powered by hooks.",
+  "homepage": "https://github.com/devrnt/react-use-wizard#readme",
+  "module": "dist/react-use-wizard.esm.js",
   "version": "0.0.0",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/devrnt/react-use-wizard"
+  },
+  "bugs": {
+    "url": "https://github.com/devrnt/react-use-wizard/issues"
+  },
   "files": [
     "dist",
     "src"
@@ -10,6 +22,25 @@
   "engines": {
     "node": ">=10"
   },
+  ".": {
+    "browser": "./dist/react-use-wizard.esm.js",
+    "import": "./dist/react-use-wizard.esm.js",
+    "require": "./dist/react-use-wizard.js"
+  },
+  "keywords": [
+    "react",
+    "reactjs",
+    "wizard",
+    "stepper",
+    "react-stepper",
+    "react-wizard",
+    "react-use",
+    "typescript",
+    "react-hooks",
+    "react-use-wizard",
+    "react-use-stepper",
+    "devrnt"
+  ],
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
@@ -32,9 +63,6 @@
       "pre-commit": "tsdx lint"
     }
   },
-  "name": "react-use-wizard",
-  "author": "devrnt",
-  "module": "dist/react-use-wizard.esm.js",
   "size-limit": [
     {
       "path": "dist/react-use-wizard.cjs.production.min.js",
