@@ -72,15 +72,15 @@ const Step1 = () => {
 
 ### Wizard
 
-`Wizard` is used to wrap your steps. Each child component will be treated as an individual step. You can set a shared `footer` and `header` that always should be in your steps. Example: pass an action button component that contain a "previous" and "next" button.
+`Wizard` is used to wrap your steps. Each child component will be treated as an individual step. You can pass a shared `footer` and `header` component that should always be in your steps. 
 
-Place the `Wizard` around it and that's it.
+Example: pass a footer component that contains a "previous" and "next" button to the wizard.
 
 #### Props
 
 | name       | type            | description                                                   | required | default |
 | ---------- | --------------- | ------------------------------------------------------------- | -------- | ------- |
-| startIndex | number          | Start index to indicate the wizard to start at the given step | ❌       | 0       |
+| startIndex | number          | Indicate the wizard to start at the given step | ❌       | 0       |
 | header     | React.ReactNode | Header that is shown above the active step                    | ❌       |         |
 | footer     | React.ReactNode | Footer that is shown below the active stepstep                | ❌       |         |
 | children   | React.ReactNode | Each child component will be treated as an individual step    | ✔️       |
@@ -126,9 +126,7 @@ const App = () => {
 
 ### useWizard
 
-Used to retrieve all methods and props bundled with the Wizard.
-
-Make sure `Wizard` is wrapped around your component when calling `useWizard`.
+Used to retrieve all methods and properties related to your wizard. Make sure `Wizard` is wrapped around your component when calling `useWizard`.
 
 **Remark** - You can't use `useWizard` in the same component where `Wizard` is used.
 
@@ -138,9 +136,8 @@ Make sure `Wizard` is wrapped around your component when calling `useWizard`.
 | ----------------------------------------------------------- | ------------------------------- | ----------------------------------------------------------------------------------------------------- |
 | nextStep                                                    | () => Promise<void>             | Go to the next step                                                                                   |
 | previousStep                                                | () => void                      | Go to the previous step                                                                               |
-| handleStep                                                  | (handler: Handler) => void      | Connect a callback that will be called when calling `nextStep`. `handler` can be either sync or async |
-| isLoading                                                   | (props?: IntercomProps) => void | \* Will reflect the handler promise state: will be `true` if the handler promise is pending and       |
-| \* `false` when the handler is either fulfilled or rejected |
+| handleStep                                                  | (handler: Handler) => void      | Attach a callback that will be called when calling `nextStep`. `handler` can be either sync or async |
+| isLoading                                                   | boolean | \* Will reflect the handler promise state: will be `true` if the handler promise is pending and `false` when the handler is either fulfilled or rejected |
 | activeStep                                                  | number                          | The current active step of the wizard                                                                 |
 | isFirstStep                                                 | boolean                         | Indicate if the current step is the first step (aka no previous step)                                 |
 | isLastStep                                                  | boolean                         | Indicate if the current step is the last step (aka no next step)                                      |
@@ -172,7 +169,7 @@ const Step1 = () => {
     handleStep,
   } = useWizard();
 
- handleStep(() => {
+  handleStep(() => {
     alert('Going to step 2');
   });
 
@@ -193,14 +190,14 @@ const Step1 = () => {
 };
 ```
 
-It's recommended to put the shared components in the `header` or `footer` in the `Wizard` to avoid duplication.
+It's recommended to pass the shared components to the `header` or `footer` in the `Wizard` to avoid duplication.
 
 ## Examples
 Go to [examples](https://github.com/devrnt/react-use-wiard/tree/master/examples) to check see some examples
 
 ## Async
 
-You can connect an async step handler to a step as well. Make sure to make to either pass an async function or return a promise (async) function:
+You can attach an async step handler to a step as well. Make sure to make to either pass an async function or return a promise (async) function:
 
 ```ts
 const Step1 = () => {
@@ -211,6 +208,8 @@ const Step1 = () => {
     await fetch(...);
   });
 
+  // OR
+
   // Return promise
   handleStep(() => {
     return fetch(...);
@@ -220,11 +219,15 @@ const Step1 = () => {
 }
 ```
 
-The `isLoading` of `useWizard` will indicate the loading state of the step when calling `nextStep`. If no errors are thrown the wizard will go to the next step, so no need to call this manually. If an error is thrown in the conencted function the wizard will just stay at the same step and will rethrow the error. (So you can try-catch in your connected function).
+### Errors
+If no errors are thrown then the wizard will go to the next step, so no need to call `nextStep` by yourself.
 
-If an async function is connected the `isLoading` of `useWizard` will indicate the loading state of the function.
+If an error is thrown in the conencted function the wizard will just stay at the same step and will rethrow the error. (So you can try-catch in your attached function).
+
+### IsLoading
+If an async function is attached to `handleStep` the `isLoading` property will indicate the loading state of the function. In general `isLoading` will reflect the handler promise state: will be `true` if the handler promise is pending and `false` when the handler is either fulfilled or rejected.
 
 ## Animation
-Since `react-use-wizard` is focused to manage the logic of a wizard doesn't mean you can't add some animation by your own. Add any animation library that you like. I highly suggest (https://www.framer.com/motion/)[framer-motion]. 
+Since `react-use-wizard` is focused to manage the logic of a wizard it doesn't mean you can't add some animation by your own. Add any animation library that you like. I highly suggest [framer-motion](https://www.framer.com/motion/) to add your animations. 
 
-Checkout this (https://github.com/devrnt/react-use-wizard/blob/docs/readme/example/components/animatedStep.tsx)[example] to see an animation to a step can be added.
+Checkout this [example](https://github.com/devrnt/react-use-wizard/blob/docs/readme/example/components/animatedStep.tsx) to see how a step can be animated with framer motion.

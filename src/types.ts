@@ -15,7 +15,7 @@ export type WizardValues = {
   /** Go to the previous step */
   previousStep: () => void;
   /**
-   * Connect a callback that will be called when calling `nextStep()`
+   * Attach a callback that will be called when calling `nextStep()`
    *
    * @param handler Can be either sync or async
    *
