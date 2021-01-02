@@ -79,11 +79,11 @@ const Wizard: React.FC<WizardProps> = React.memo(
           logger.log('warn', 'An invalid startIndex is passed to <Wizard>');
         }
         // Invalid header element
-        if (!React.isValidElement(header)) {
+        if (header && !React.isValidElement(header)) {
           logger.log('error', 'Invalid header passed to <Wizard>');
         }
         // Invalid footer element
-        if (!React.isValidElement(footer)) {
+        if (footer && !React.isValidElement(footer)) {
           logger.log('error', 'Invalid footer passed to <Wizard>');
         }
       }

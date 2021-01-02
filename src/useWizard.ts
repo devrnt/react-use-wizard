@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { WizardValues } from './types';
 import WizardContext from './wizardContext';
 
 const useWizard = () => {
@@ -8,7 +9,7 @@ const useWizard = () => {
   if (!context && __DEV__) {
     throw Error('Wrap your step with `Wizard`');
   } else {
-    return context;
+    return context as WizardValues;
   }
 };
 
