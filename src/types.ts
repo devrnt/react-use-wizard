@@ -35,3 +35,6 @@ export type WizardValues = {
   /** Indicate if the current step is the last step (aka no next step) */
   isLastStep: boolean;
 } | null;
+
+/** Console log levels */
+export type LogLevel = 'info' | 'error' | 'warn';
