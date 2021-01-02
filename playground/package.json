@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "private": true,
+  "homepage": "https://devrnt.github.io/react-use-wizard/",
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html"
