@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { useWizard } from '../..';
+import { useWizard } from '../../dist';
 
 type Props = {
   number: number;

@@ -4,7 +4,7 @@ import './style.css';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { Wizard } from '../.';
+import { Wizard } from '../dist';
 import { AsyncStep, Footer, Step } from './components';
 import AnimatedStep from './components/animatedStep';
 

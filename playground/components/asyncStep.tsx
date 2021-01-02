@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { useWizard } from '../..';
+import { useWizard } from '../../dist';
 import { useMockMutation } from '../hooks';
 
 type Props = {
