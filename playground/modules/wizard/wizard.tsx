@@ -1,10 +1,10 @@
+import { styled } from 'goober';
 import * as React from 'react';
-import styled from 'styled-components';
 
 import { Wizard } from '../../../dist';
 import { AnimatedStep, AsyncStep, Footer, Step } from '../../components';
 
-const Grid = styled.div`
+const Grid = styled('section')`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   width: 100%;
@@ -21,7 +21,7 @@ const Title = styled('h2')`
   }
 `;
 
-const Item = styled.div`
+const Item = styled('div')`
   display: grid;
   grid-template-rows: min-content;
 

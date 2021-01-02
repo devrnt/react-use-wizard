@@ -1,8 +1,8 @@
+// @ts-ignore
+import { createGlobalStyles } from 'goober/global';
 import * as React from 'react';
-import { createGlobalStyle } from 'styled-components';
-import { Normalize } from 'styled-normalize';
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyles`
   :root {
     --light: #0b002b;
     --nav: rgba(3, 0, 12, 0.5);
@@ -50,7 +50,6 @@ const GlobalStyle = createGlobalStyle`
 
 const Style = () => (
   <>
-    <Normalize />
     <GlobalStyle />
   </>
 );

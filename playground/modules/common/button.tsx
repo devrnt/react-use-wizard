@@ -1,12 +1,12 @@
+import { styled } from 'goober';
 import * as React from 'react';
-import styled from 'styled-components';
 
 type Props = {
   label: string;
   disabled: boolean;
 } & React.HTMLAttributes<HTMLButtonElement>;
 
-const Container = styled.button`
+const Container = styled('button')`
   width: fit-content;
   min-width: 8rem;
   border: 1px solid var(--purple);
