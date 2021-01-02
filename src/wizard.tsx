@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import * as logger from './logger';
 import { Handler, WizardProps } from './types';
 import WizardContext from './wizardContext';
 
@@ -62,10 +63,33 @@ const Wizard: React.FC<WizardProps> = React.memo(
       [doNextStep, previousStep, isLoading, handleStep, activeStep],
     );
 
-    const activeStepContent = React.useMemo(
-      () => React.Children.toArray(children)[activeStep],
-      [activeStep, children],
-    );
+    const activeStepContent = React.useMemo(() => {
+      const reactChildren = React.Children.toArray(children);
+
+      if (__DEV__) {
+        // No steps passed
+        if (reactChildren.length === 0) {
+          logger.log(
+            'warn',
+            'Make sure to pass your steps as children in your <Wizard>',
+          );
+        }
+        // The passed start index is invalid
+        if (activeStep > reactChildren.length) {
+          logger.log('warn', 'An invalid startIndex is passed to <Wizard>');
+        }
+        // Invalid header element
+        if (header && !React.isValidElement(header)) {
+          logger.log('error', 'Invalid header passed to <Wizard>');
+        }
+        // Invalid footer element
+        if (footer && !React.isValidElement(footer)) {
+          logger.log('error', 'Invalid footer passed to <Wizard>');
+        }
+      }
+
+      return reactChildren[activeStep];
+    }, [activeStep, children, header, footer]);
 
     return (
       <WizardContext.Provider value={wizardValue}>
