@@ -1,4 +1,4 @@
-<p align="center"><img src="https://raw.githubusercontent.com/devrnt/react-use-wizard/main/assets/logo.svg" alt="react-use-wizard logo" height="120px" style="margin-top: 20px;"/></p>
+<p align="center"><img src="./assets/logo.svg" alt="react-use-wizard logo" height="120px" style="margin-top: 20px;"/></p>
 <h1 align="center">react-use-wizard</h1>
 <p align="center">A React wizard (stepper) builder without the hassle, powered by hooks.</p>
 
