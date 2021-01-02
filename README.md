@@ -42,7 +42,7 @@ const App = () => (
 const Step1 = () => {
   const { handleStep, previousStep, nextStep } = useWizard();
 
-  // Attach a handler
+  // Attach an optional handler
   handleStep(() => {
     alert('Going to step 2');
   });
@@ -88,30 +88,10 @@ Example: pass a footer component that contains a "previous" and "next" button to
 #### Example
 
 ```javascript
+// Example: show the active step in this component
 const Header = () => <p>I am the header component</p>;
 
-const Footer = () => {
-  const {
-    nextStep,
-    previousStep,
-    activeStep,
-    isLastStep,
-    isFirstStep,
-  } = useWizard();
-
-  return (
-    <>
-      <div>
-        Has next step: {!isLastStep ? '✅' : '⛔'}
-        <br />
-        Has previous step : {!isFirstStep ? '✅' : '⛔'}
-      </div>
-      Active step: {activeStep + 1} <br />
-      <button onClick={previousStep}>Previous</button>
-      <button onClick={nextStep}>Next</button>
-    </>
-  );
-};
+const Footer = () => <p>I am the footer component</p>;
 
 const App = () => {
   return (
