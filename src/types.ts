@@ -28,7 +28,7 @@ export type WizardValues = {
    * `false` when the handler is either fulfilled or rejected
    */
   isLoading: boolean;
-  /** The urrent active step of the wizard */
+  /** The current active step of the wizard */
   activeStep: number;
   /** Indicate if the current step is the first step (aka no previous step) */
   isFirstStep: boolean;
