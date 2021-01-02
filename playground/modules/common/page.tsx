@@ -1,5 +1,5 @@
+import { styled } from 'goober';
 import * as React from 'react';
-import styled from 'styled-components';
 
 import githubLogoPath from '../../assets/images/githubLogo.svg';
 import logoPath from '../../assets/images/logo.svg';
@@ -10,26 +10,26 @@ type Props = {
   children: React.ReactNode;
 };
 
-const Container = styled.main`
+const Container = styled('main')`
   display: flex;
   justify-content: center;
   background: var(--dark);
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled('div')`
   width: 100%;
 `;
 
-const Body = styled.div`
+const Body = styled('div')`
   margin-top: 2rem;
 `;
 
-const Description = styled.div`
+const Description = styled('div')`
   font-size: 1.1rem;
   font-weight: 200;
 `;
 
-const Divider = styled.div`
+const Divider = styled('div')`
   height: 2px;
   width: 7%;
   background-image: linear-gradient(48.66deg, var(--purple), var(--blue));
@@ -37,7 +37,7 @@ const Divider = styled.div`
   display: flex;
 `;
 
-const TopBar = styled.header`
+const TopBar = styled('header')`
   position: sticky;
   top: 0;
   left: 0;
@@ -52,12 +52,12 @@ const TopBar = styled.header`
   z-index: 1000;
 `;
 
-const Logo = styled.img`
+const Logo = styled('img')`
   height: 3rem;
   width: 3rem;
 `;
 
-const GithubLogo = styled.img`
+const GithubLogo = styled('img')`
   width: 2rem;
 `;
 

@@ -1,11 +1,11 @@
+import { styled } from 'goober';
 import * as React from 'react';
-import styled from 'styled-components';
 
 type Props = {
   label: string;
 };
 
-const Container = styled.div<Props>`
+const Container = styled('div')<Props>`
   position: relative;
   height: 100%;
   width: 100%;

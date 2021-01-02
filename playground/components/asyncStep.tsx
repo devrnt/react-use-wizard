@@ -1,5 +1,5 @@
+import { styled } from 'goober';
 import * as React from 'react';
-import styled from 'styled-components';
 
 import { useWizard } from '../../dist';
 import { useMockMutation } from '../hooks';
@@ -31,7 +31,7 @@ const Container = styled('div')`
   align-items: center;
 `;
 
-const P = styled.p`
+const P = styled('p')`
   color: white;
 `;
 

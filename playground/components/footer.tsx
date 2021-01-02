@@ -1,10 +1,10 @@
+import { styled } from 'goober';
 import * as React from 'react';
-import styled from 'styled-components';
 
 import { useWizard } from '../../dist';
 import { Button } from '../modules/common';
 
-const Actions = styled.div`
+const Actions = styled('div')`
   display: grid;
   justify-content: center;
   margin: 1rem 0;
@@ -12,7 +12,7 @@ const Actions = styled.div`
   gap: 1rem;
 `;
 
-const Info = styled.div`
+const Info = styled('div')`
   display: flex;
   justify-content: center;
   gap: 1rem;
