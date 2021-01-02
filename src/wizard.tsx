@@ -4,8 +4,8 @@ import { Handler, WizardProps } from './types';
 import WizardContext from './wizardContext';
 
 const Wizard: React.FC<WizardProps> = React.memo(
-  ({ header, footer, children }) => {
-    const [activeStep, setActiveStep] = React.useState(0);
+  ({ header, footer, startIndex = 0, children }) => {
+    const [activeStep, setActiveStep] = React.useState(startIndex);
     const [isLoading, setIsLoading] = React.useState(false);
     const hasNextStep = React.useRef(true);
     const hasPreviousStep = React.useRef(false);

@@ -5,6 +5,8 @@ export type WizardProps = {
   header?: React.ReactNode;
   /** Optional footer that is shown below the active step */
   footer?: React.ReactNode;
+  /** Optional start index @default 0 */
+  startIndex?: number;
 };
 
 export type WizardValues = {
