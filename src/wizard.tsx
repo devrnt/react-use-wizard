@@ -23,9 +23,9 @@ const Wizard: React.FC<WizardProps> = React.memo(
 
     const previousStep = React.useCallback(() => {
       if (hasPreviousStep.current) {
-        setActiveStep((prev) => prev - 1);
+        setActiveStep((activeStep) => activeStep - 1);
       }
-    }, [setActiveStep]);
+    }, []);
 
     // Callback to attach the step handler
     const handleStep = React.useCallback((handler: Handler) => {
