@@ -33,7 +33,17 @@ const AsyncStep: React.FC<Props> = React.memo(({ number }) => {
   // });
 
   return (
-    <div>
+    <div
+      style={{
+        border: '1px solid grey',
+        minHeight: '20vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
+      }}
+    >
+      <code>Async</code>
       <p>Step {number}</p>
       {isLoading && <p>loading...</p>}
     </div>
