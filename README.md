@@ -14,6 +14,7 @@
 
 - Simplicity
 - Focused on logic
+- Zero dependencies
 - No UI restrictions
 - Written in TypeScript
 
@@ -180,8 +181,7 @@ Small playground to showcase the functionalities of `react-use-wizard`:
 [https://devrnt.github.io/react-use-wizard/](https://devrnt.github.io/react-use-wizard/)
 
 ## Examples
-
-Go to [examples](https://github.com/devrnt/react-use-wiard/tree/master/examples) to check see some examples
+Go to [examples](https://github.com/devrnt/react-use-wizard/tree/master/examples) to check out some integrations (Gatsby, NextJS...).
 
 ## Async
 

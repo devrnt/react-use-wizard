@@ -40,6 +40,8 @@
     "react-hooks",
     "react-use-wizard",
     "react-use-stepper",
+    "gastsby",
+    "nextjs",
     "devrnt"
   ],
   "scripts": {

@@ -1,0 +1,6 @@
+{
+  "arrowParens": "always",
+  "semi": true,
+  "useTabs": false,
+  "printWidth": 80
+}
