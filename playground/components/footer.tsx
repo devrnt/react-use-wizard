@@ -5,17 +5,31 @@ import { useWizard } from '../../dist';
 import { Button } from '../modules/common';
 
 const Actions = styled('div')`
-  display: grid;
+  display: flex;
   justify-content: center;
   margin: 1rem 0;
-  grid-template-columns: min-content min-content;
   gap: 1rem;
+  flex-direction: row;
 `;
 
 const Info = styled('div')`
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 0;
+
+  & > p {
+    margin: 0.25rem 0;
+  }
+
+  @media screen and (min-width: 600px) {
+    flex-direction: row;
+    gap: 1rem;
+
+    & > p {
+      margin: initial;
+    }
+  }
 `;
 
 const Footer: React.FC = React.memo(() => {

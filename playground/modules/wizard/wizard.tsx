@@ -1,12 +1,12 @@
-import { styled } from 'goober';
+import { css, styled } from 'goober';
 import * as React from 'react';
 
 import { Wizard } from '../../../dist';
 import { AnimatedStep, AsyncStep, Footer, Step } from '../../components';
 
-const Grid = styled('section')`
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
+const Container = styled('section')`
+  display: flex;
+  flex-direction: column;
   width: 100%;
 `;
 
@@ -21,27 +21,45 @@ const Title = styled('h2')`
   }
 `;
 
-const Item = styled('div')`
-  display: grid;
-  grid-template-rows: min-content;
+const Item = styled('div')<{ showDivider: boolean }>`
+  display: flex;
+  flex-direction: column;
 
   &::after {
-    content: '';
     margin: 3rem 0 2rem;
+    content: '';
     background-image: linear-gradient(48.66deg, var(--purple), var(--blue));
     width: 100%;
     position: relative;
-    height: 1px;
+    height: ${({ showDivider }) => (showDivider ? '1px' : 0)};
   }
+
+  ${({ showDivider }) =>
+    showDivider
+      ? `
+          &::after {
+            margin: 3rem 0 2rem;
+            content: '';
+            background-image: linear-gradient(
+              48.66deg,
+              var(--purple),
+              var(--blue)
+            );
+            width: 100%;
+            position: relative;
+            height: 1px;
+          }
+        `
+      : ''}
 `;
 
 const WizardModule = () => {
   return (
-    <Grid>
+    <Container>
       <Title>
         Simple wizard <span>mix of async and sync steps</span>
       </Title>
-      <Item>
+      <Item showDivider>
         <Wizard footer={<Footer />}>
           <AsyncStep number={1} />
           <Step number={2} />
@@ -51,9 +69,9 @@ const WizardModule = () => {
       </Item>
 
       <Title>
-        Animated wizard <span>animations by framer motion</span>
+        Animated wizard <span>animation by framer motion</span>
       </Title>
-      <Item>
+      <Item showDivider={false}>
         <Wizard footer={<Footer />}>
           <AnimatedStep>
             <Step number={1} withCallback={false} />
@@ -69,7 +87,7 @@ const WizardModule = () => {
           </AnimatedStep>
         </Wizard>
       </Item>
-    </Grid>
+    </Container>
   );
 };
 
