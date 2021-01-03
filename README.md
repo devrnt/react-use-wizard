@@ -3,7 +3,7 @@
 <p align="center">A React wizard (stepper) builder without the hassle, powered by hooks.</p>
 
 <p align="center">
-<img alt="ci" src="https://github.com/devrnt/react-use-wizard/workflows/CI/badge.svg?branch=master">
+<img alt="ci" src="https://github.com/devrnt/react-use-wizard/workflows/CI/badge.svg?branch=main">
 <img alt="version" src="https://img.shields.io/npm/v/react-use-wizard.svg" />
 <img alt="downloads" src="https://badgen.net/npm/dt/react-use-wizard" />
 <img alt="minzipped size" src="https://badgen.net/bundlephobia/minzip/react-use-wizard">
