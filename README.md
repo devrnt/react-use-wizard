@@ -175,6 +175,10 @@ const Step1 = () => {
 
 It's recommended to pass the shared components to the `header` or `footer` in the `Wizard` to avoid duplication.
 
+## Playground
+Small playground to showcase the functionalities of `react-use-wizard`:
+[https://devrnt.github.io/react-use-wizard/](https://devrnt.github.io/react-use-wizard/)
+
 ## Examples
 
 Go to [examples](https://github.com/devrnt/react-use-wiard/tree/master/examples) to check see some examples
