@@ -7,7 +7,7 @@
   "homepage": "https://devrnt.github.io/react-use-wizard/",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html --public-url /react-use-wizard/"
   },
   "dependencies": {
     "framer-motion": "^3.1.1",
