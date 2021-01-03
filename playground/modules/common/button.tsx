@@ -12,7 +12,7 @@ const Container = styled('button')`
   border: 1px solid var(--purple);
   padding: 0.7rem 1.75rem;
   border-radius: 6px;
-  color: white;
+  color: var(--text);
   font-size: 1.1rem;
   font-weight: 700;
   background-color: var(--dark);
@@ -27,6 +27,7 @@ const Container = styled('button')`
   &:disabled {
     opacity: 0.4;
     background-image: initial;
+    cursor: initial;
   }
 `;
 

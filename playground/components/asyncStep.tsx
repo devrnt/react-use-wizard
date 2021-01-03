@@ -32,7 +32,7 @@ const Container = styled('div')`
 `;
 
 const P = styled('p')`
-  color: white;
+  color: var(--text);
 `;
 
 const AsyncStep: React.FC<Props> = React.memo(({ number }) => {

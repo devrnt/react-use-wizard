@@ -21,7 +21,7 @@ const Container = styled('div')`
 `;
 
 const P = styled('p')`
-  color: white;
+  color: var(--text);
 `;
 
 const Step: React.FC<Props> = React.memo(({ number, withCallback = true }) => {

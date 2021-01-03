@@ -11,6 +11,11 @@ const GlobalStyle = createGlobalStyles`
     --blue: #08D8F4;
     --code:#260949;
     --step:#170231;
+    --text: #cccccc;
+  }
+
+  * {
+    box-sizing: border-box;
   }
 
   html {
@@ -31,7 +36,7 @@ const GlobalStyle = createGlobalStyles`
   body {
     font-family: 'Inter', Helvetica, sans-serif;
     text-rendering: optimizeLegibility;
-    color: white;
+    color: var(--text);
   }
 
   i {
@@ -44,7 +49,7 @@ const GlobalStyle = createGlobalStyles`
     border-radius: 2px;
     font-family: 'Fira Code', monospace;
     font-size: 0.95rem;
-    padding: 0.75rem 0.35rem;
+    padding: 0.75rem 1rem;
   }
 `;
 
