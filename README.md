@@ -181,7 +181,7 @@ Small playground to showcase the functionalities of `react-use-wizard`:
 
 ## Examples
 
-Go to [examples](https://github.com/devrnt/react-use-wiard/tree/master/examples) to check see some examples
+Go to [examples](https://github.com/devrnt/react-use-wizard/tree/master/examples) to check see some examples
 
 ## Async
 
