@@ -63,7 +63,6 @@ const Step1 = () => {
 - [Examples](#examples)
 - [Async](#async)
 - [Animation](#animation)
-- [Advanced](#advanced)
 
 ## API
 
