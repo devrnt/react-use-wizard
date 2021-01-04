@@ -221,4 +221,4 @@ If an async function is attached to `handleStep` the `isLoading` property will i
 
 Since `react-use-wizard` is focused to manage the logic of a wizard it doesn't mean you can't add some animation by your own. Add any animation library that you like. I highly suggest [framer-motion](https://www.framer.com/motion/) to add your animations.
 
-Checkout this [example](https://github.com/devrnt/react-use-wizard/blob/docs/readme/example/components/animatedStep.tsx) to see how a step can be animated with framer motion.
+Checkout this [example](https://github.com/devrnt/react-use-wizard/blob/main/playground/components/animatedStep.tsx) to see how a step can be animated with framer motion. 
