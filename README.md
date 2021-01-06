@@ -179,6 +179,12 @@ It's recommended to pass the shared components to the `header` or `footer` in th
 Small playground to showcase the functionalities of `react-use-wizard`:
 [https://devrnt.github.io/react-use-wizard/](https://devrnt.github.io/react-use-wizard/)
 
+Following use cases are available in the playground
+ - Simple wizard with async and sync steps
+ - Animated wizard with sync steps
+ - Integration with [react-query](https://react-query.tanstack.com/) (mutation on next step)
+
+ Source code can be found [here](https://github.com/devrnt/react-use-wizard/tree/main/playground).
 ## Examples
 Go to [examples](https://github.com/devrnt/react-use-wizard/tree/master/examples) to check out some integrations (Gatsby, NextJS...).
 
