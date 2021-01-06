@@ -5,10 +5,14 @@ import { useMutation } from 'react-query';
 import { useWizard } from '../../../../dist';
 
 const Container = styled('div')`
+  background: var(--step);
+  border: 1px solid #250b46;
+  border-radius: 2px;
+  padding: 2.75rem 0.35rem;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
   min-height: 35vh;
 `;
 
