@@ -26,10 +26,12 @@ type Props = {
 
 const LazyQueryStep: React.FC<Props> = ({ number }) => {
   const { handleStep, isLoading } = useWizard();
-  const { error, data, mutateAsync } = useMutation('repDataMutation', () =>
-    fetch('https://jsonplaceholder.typicode.com/todos').then((res) =>
-      res.json(),
-    ),
+  const { error, data, mutateAsync } = useMutation(
+    `getTodosLazy${number}`,
+    () =>
+      fetch('https://jsonplaceholder.typicode.com/todos').then((res) =>
+        res.json(),
+      ),
   );
 
   handleStep(() => {

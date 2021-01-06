@@ -23,7 +23,7 @@ type Props = {
 };
 
 const QueryStep: React.FC<Props> = ({ number }) => {
-  const { isLoading, error, data } = useQuery('repoData', () =>
+  const { isLoading, error, data } = useQuery(`getTodoById${number}`, () =>
     fetch(`https://jsonplaceholder.typicode.com/todos/${number}`).then((res) =>
       res.json(),
     ),
