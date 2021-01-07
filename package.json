@@ -23,10 +23,12 @@
   "engines": {
     "node": ">=10"
   },
-  ".": {
-    "browser": "./dist/react-use-wizard.esm.js",
-    "import": "./dist/react-use-wizard.esm.js",
-    "require": "./dist/react-use-wizard.js"
+  "exports": {
+    ".": {
+      "browser": "./dist/react-use-wizard.esm.js",
+      "import": "./dist/react-use-wizard.esm.js",
+      "require": "./dist/index.js"
+    }
   },
   "keywords": [
     "react",
