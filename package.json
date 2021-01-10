@@ -55,7 +55,7 @@
     "test:coverage": "tsdx test --coverage",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
-    "size": "size-limit",
+    "size": "yarn build && size-limit",
     "analyze": "size-limit --why",
     "release": "np"
   },
