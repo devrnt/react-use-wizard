@@ -35,17 +35,16 @@ const Wizard: React.FC<WizardProps> = React.memo(
 
     const doNextStep = React.useCallback(async () => {
       if (hasNextStep.current && nextStepHandler.current) {
-        setIsLoading(true);
-        Promise.resolve(nextStepHandler.current)
-          .then(() => {
-            setIsLoading(false);
-            nextStepHandler.current = null;
-            return goToNextStep();
-          })
-          .catch((error) => {
-            setIsLoading(false);
-            throw error;
-          });
+        try {
+          setIsLoading(true);
+          await nextStepHandler.current();
+          setIsLoading(false);
+          nextStepHandler.current = null;
+          goToNextStep();
+        } catch (error) {
+          setIsLoading(false);
+          throw error;
+        }
       } else {
         goToNextStep();
       }
