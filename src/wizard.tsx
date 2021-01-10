@@ -16,51 +16,51 @@ const Wizard: React.FC<WizardProps> = React.memo(
       activeStep < React.Children.toArray(children).length - 1;
     hasPreviousStep.current = activeStep > 0;
 
-    const goToNextStep = React.useCallback(() => {
+    const goToNextStep = React.useRef(() => {
       if (hasNextStep.current) {
         setActiveStep((activeStep) => activeStep + 1);
       }
-    }, []);
+    });
 
-    const previousStep = React.useCallback(() => {
+    const previousStep = React.useRef(() => {
       if (hasPreviousStep.current) {
         setActiveStep((activeStep) => activeStep - 1);
       }
-    }, []);
+    });
 
     // Callback to attach the step handler
-    const handleStep = React.useCallback((handler: Handler) => {
+    const handleStep = React.useRef((handler: Handler) => {
       nextStepHandler.current = handler;
-    }, []);
+    });
 
-    const doNextStep = React.useCallback(async () => {
+    const doNextStep = React.useRef(async () => {
       if (hasNextStep.current && nextStepHandler.current) {
         try {
           setIsLoading(true);
           await nextStepHandler.current();
           setIsLoading(false);
           nextStepHandler.current = null;
-          goToNextStep();
+          goToNextStep.current();
         } catch (error) {
           setIsLoading(false);
           throw error;
         }
       } else {
-        goToNextStep();
+        goToNextStep.current();
       }
-    }, [goToNextStep]);
+    });
 
     const wizardValue = React.useMemo(
       () => ({
-        nextStep: doNextStep,
-        previousStep,
-        handleStep,
+        nextStep: doNextStep.current,
+        previousStep: previousStep.current,
+        handleStep: handleStep.current,
         isLoading,
         activeStep,
         isFirstStep: Boolean(!hasPreviousStep.current),
         isLastStep: Boolean(!hasNextStep.current),
       }),
-      [doNextStep, previousStep, isLoading, handleStep, activeStep],
+      [activeStep, isLoading],
     );
 
     const activeStepContent = React.useMemo(() => {
