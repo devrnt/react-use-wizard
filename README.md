@@ -16,6 +16,7 @@
 - Focused on logic
 - Zero dependencies
 - No UI restrictions
+- [Tiny size](https://bundlephobia.com/result?p=react-use-wizard@latest)
 - Written in TypeScript
 
 ## Installation
