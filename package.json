@@ -55,7 +55,7 @@
     "test:coverage": "tsdx test --coverage",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
-    "size": "size-limit",
+    "size": "tsdx build && size-limit",
     "analyze": "size-limit --why",
     "release": "np"
   },
@@ -71,11 +71,11 @@
   "size-limit": [
     {
       "path": "dist/react-use-wizard.cjs.production.min.js",
-      "limit": "3 KB"
+      "limit": "500 B"
     },
     {
       "path": "dist/react-use-wizard.esm.js",
-      "limit": "3 KB"
+      "limit": "500 B"
     }
   ],
   "devDependencies": {
