@@ -5,7 +5,7 @@
 <p align="center">
 <img alt="ci" src="https://github.com/devrnt/react-use-wizard/workflows/CI/badge.svg?branch=main">
 <img alt="version" src="https://img.shields.io/npm/v/react-use-wizard.svg" />
-<img alt="downloads" src="https://badgen.net/npm/dt/react-use-wizard" />
+<img alt="downloads" src="https://badgen.net/npm/dw/react-use-wizard" />
 <img alt="minzipped size" src="https://badgen.net/bundlephobia/minzip/react-use-wizard">
 <img alt="known vulnerabilities" src="https://snyk.io/test/github/devrnt/react-use-wizard/badge.svg">
 </p>
