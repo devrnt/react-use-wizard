@@ -1,10 +1,17 @@
 import { setup } from 'goober';
+import { shouldForwardProp } from 'goober/should-forward-prop';
 import * as React from 'react';
 
 import { WizardModule } from './modules';
 import { Page, Style } from './modules/common';
 
-setup(React.createElement);
+setup(
+  React.createElement,
+  undefined,
+  undefined,
+  // Transient props
+  shouldForwardProp((prop) => prop[0] !== '$'),
+);
 
 const App = () => {
   return (

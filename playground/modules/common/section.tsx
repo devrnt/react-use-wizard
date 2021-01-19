@@ -12,7 +12,7 @@ const Title = styled('h2')`
   }
 `;
 
-const Item = styled('div')<{ showDivider: boolean }>`
+const Item = styled('div')<{ $showDivider: boolean }>`
   display: flex;
   flex-direction: column;
 
@@ -22,26 +22,25 @@ const Item = styled('div')<{ showDivider: boolean }>`
     background-image: linear-gradient(48.66deg, var(--purple), var(--blue));
     width: 100%;
     position: relative;
-    height: ${({ showDivider }) => (showDivider ? '1px' : 0)};
+    height: ${({ $showDivider }) => ($showDivider ? '1px' : 0)};
   }
 
-  ${({ showDivider }) =>
-    showDivider
-      ? `
-          &::after {
-            margin: 3rem 0 2rem;
-            content: '';
-            background-image: linear-gradient(
-              48.66deg,
-              var(--purple),
-              var(--blue)
-            );
-            width: 100%;
-            position: relative;
-            height: 1px;
-          }
-        `
-      : ''}
+  ${({ $showDivider }) =>
+    $showDivider &&
+    `
+      &::after {
+        margin: 3rem 0 2rem;
+        content: '';
+        background-image: linear-gradient(
+          48.66deg,
+          var(--purple),
+          var(--blue)
+        );
+        width: 100%;
+        position: relative;
+        height: 1px;
+      }
+    `}
 `;
 
 type Props = {
@@ -61,7 +60,7 @@ const Section: React.FC<Props> = ({
       <Title>
         {title} <span>{description}</span>
       </Title>
-      <Item showDivider={showDivider}>{children}</Item>
+      <Item $showDivider={showDivider}>{children}</Item>
     </>
   );
 };
