@@ -37,6 +37,17 @@ describe('Wizard', () => {
     expect(queryByText('step 2')).not.toBeInTheDocument();
   });
 
+  test('should render second step with passed `startIndex`', () => {
+    const { queryByText } = render(
+      <Wizard startIndex={1}>
+        <p>step 1</p>
+        <p>step 2</p>
+      </Wizard>,
+    );
+
+    expect(queryByText('step 2')).toBeInTheDocument();
+  });
+
   test('should render header', () => {
     const { queryByText } = render(ComponentWithHeader);
 
