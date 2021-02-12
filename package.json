@@ -4,7 +4,7 @@
   "description": "React wizard (stepper) builder without the hassle, powered by hooks.",
   "homepage": "https://github.com/devrnt/react-use-wizard#readme",
   "module": "dist/react-use-wizard.esm.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
