@@ -50,8 +50,8 @@ const Step1 = () => {
 
   return (
     <>
-      <button onClick={previousStep}>Previous ⏮️</button>
-      <button onClick={nextStep}>Next ⏭</button>
+      <button onClick={() => previousStep()}>Previous ⏮️</button>
+      <button onClick={() => nextStep()}>Next ⏭</button>
     </>
   );
 };
@@ -112,14 +112,16 @@ Used to retrieve all methods and properties related to your wizard. Make sure `W
 
 `handleStep` is used to attach a handler to the step, can either be `async` or a `sync` function. This function will be invoked when calling `nextStep`.
 
+Provide an optional `stepIndex` to either `nextStep` or `previousStep` to overwrite the default "step-flow" behaviour.
+
 **Remark** - You can't use `useWizard` in the same component where `Wizard` is used.
 
 #### Methods
 
 | name         | type                       | description                                                                                                                                              |
 | ------------ | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| nextStep     | () => Promise<void>        | Go to the next step                                                                                                                                      |
-| previousStep | () => void                 | Go to the previous step                                                                                                                                  |
+| nextStep     | (stepIndex?: number) => Promise<void>        | Go to the next step. Overwrite the default behaviour by providing a step index                                                                                                                                      |
+| previousStep | (stepIndex?: number) => void                 | Go to the previous step. Overwrite the default behaviour by providing a step index                                                                                                                                  |
 | handleStep   | (handler: Handler) => void | Attach a callback that will be called when calling `nextStep`.  `handler` can be either sync or async                                                     |
 | isLoading    | boolean                    | \* Will reflect the handler promise state: will be `true` if the handler promise is pending and `false` when the handler is either fulfilled or rejected |
 | activeStep   | number                     | The current active step of the wizard                                                                                                                    |
@@ -162,8 +164,8 @@ const Step1 = () => {
     <>
       <p>Step 1</p>
       {isLoading && <p>loading...</p>}
-      <button onClick={previousStep}>Previous</button>
-      <button onClick={nextStep}>Next</button>
+      <button onClick={() => previousStep()}>Previous</button>
+      <button onClick={() => nextStep()}>Next</button>
       <div>
         Has next step: {!isLastStep ? '✅' : '⛔'}
         <br />

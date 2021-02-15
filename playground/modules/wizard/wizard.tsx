@@ -2,6 +2,7 @@ import { styled } from 'goober';
 import * as React from 'react';
 
 import AnimatedSection from './animated';
+import CustomNextStepIndex from './customNextStepIndex';
 import ReactQuerySection from './reactQuery';
 import SimpleSection from './simple';
 
@@ -17,6 +18,7 @@ const WizardModule = () => {
       <SimpleSection />
       <AnimatedSection />
       <ReactQuerySection />
+      <CustomNextStepIndex />
     </Container>
   );
 };
