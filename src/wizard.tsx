@@ -46,7 +46,7 @@ const Wizard: React.FC<WizardProps> = React.memo(
           throw error;
         }
       } else {
-        goToNextStep.current();
+        goToNextStep.current(stepIndex);
       }
     });
 

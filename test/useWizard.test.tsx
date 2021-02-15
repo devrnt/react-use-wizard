@@ -114,6 +114,36 @@ describe('useWizard', () => {
     });
   });
 
+  test('should go to passed step index on next step with handler', () => {
+    const callback = jest.fn();
+
+    const { result } = renderHook(() => useWizard(), {
+      wrapper: ({ children }: { children: React.ReactNode }) => {
+        return <Wizard>{children}</Wizard>;
+      },
+      initialProps: {
+        children: (
+          <>
+            <p>step 1</p>
+            <p>step 2</p>
+            <p>step 3</p>
+          </>
+        ),
+      },
+    });
+
+    act(() => {
+      result.current.handleStep(callback);
+    });
+    // Wait for an element to appear
+    waitFor(() => {
+      result.current.nextStep(2);
+      expect(result.current.isFirstStep).toBe(false);
+      expect(result.current.isLastStep).toBe(true);
+      expect(callback).toBeCalled();
+    });
+  });
+
   test('should go to passed step index on previous step', () => {
     const { result } = renderHook(() => useWizard(), {
       wrapper: ({ children }: { children: React.ReactNode }) => {
