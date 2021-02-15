@@ -6,11 +6,7 @@ import Section from '../../common/section';
 
 const AnimatedSection: React.FC = () => {
   return (
-    <Section
-      title="Animated wizard"
-      description="animation by framer motion"
-      showDivider={false}
-    >
+    <Section title="Animated wizard" description="animation by framer motion">
       <Wizard footer={<Footer />}>
         <AnimatedStep>
           <Step number={1} withCallback={false} />

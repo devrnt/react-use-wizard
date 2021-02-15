@@ -24,23 +24,6 @@ const Item = styled('div')<{ $showDivider: boolean }>`
     position: relative;
     height: ${({ $showDivider }) => ($showDivider ? '1px' : 0)};
   }
-
-  ${({ $showDivider }) =>
-    $showDivider &&
-    `
-      &::after {
-        margin: 3rem 0 2rem;
-        content: '';
-        background-image: linear-gradient(
-          48.66deg,
-          var(--purple),
-          var(--blue)
-        );
-        width: 100%;
-        position: relative;
-        height: 1px;
-      }
-    `}
 `;
 
 type Props = {

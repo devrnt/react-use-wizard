@@ -12,11 +12,7 @@ const queryClient = new QueryClient();
 const ReactQuerySection: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <Section
-        title="React query"
-        description="integration with react-query"
-        showDivider={false}
-      >
+      <Section title="React query" description="integration with react-query">
         <Wizard footer={<Footer />}>
           <QueryStep number={1} />
           <LazyQueryStep number={2} />

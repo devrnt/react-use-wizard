@@ -9,6 +9,7 @@ const CustomNextStepIndex: React.FC = () => {
     <Section
       title="Custom step index"
       description="With custom step index on next step"
+      showDivider={false}
     >
       <Wizard footer={<FooterStepIndex />}>
         <AsyncStep number={1} />
