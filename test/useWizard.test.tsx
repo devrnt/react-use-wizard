@@ -91,6 +91,52 @@ describe('useWizard', () => {
     });
   });
 
+  test('should go to passed step index on next step', () => {
+    const { result } = renderHook(() => useWizard(), {
+      wrapper: ({ children }: { children: React.ReactNode }) => {
+        return <Wizard>{children}</Wizard>;
+      },
+      initialProps: {
+        children: (
+          <>
+            <p>step 1</p>
+            <p>step 2</p>
+            <p>step 3</p>
+          </>
+        ),
+      },
+    });
+    // Wait for an element to appear
+    waitFor(() => {
+      result.current.nextStep(2);
+      expect(result.current.isFirstStep).toBe(false);
+      expect(result.current.isLastStep).toBe(true);
+    });
+  });
+
+  test('should go to passed step index on previous step', () => {
+    const { result } = renderHook(() => useWizard(), {
+      wrapper: ({ children }: { children: React.ReactNode }) => {
+        return <Wizard>{children}</Wizard>;
+      },
+      initialProps: {
+        children: (
+          <>
+            <p>step 1</p>
+            <p>step 2</p>
+            <p>step 3</p>
+          </>
+        ),
+      },
+    });
+    // Wait for an element to appear
+    waitFor(() => {
+      result.current.previousStep(2);
+      expect(result.current.isFirstStep).toBe(false);
+      expect(result.current.isLastStep).toBe(true);
+    });
+  });
+
   test('should not go to previous step if first step', () => {
     const { result } = renderUseWizardHook();
 

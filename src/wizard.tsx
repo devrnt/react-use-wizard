@@ -16,15 +16,15 @@ const Wizard: React.FC<WizardProps> = React.memo(
       activeStep < React.Children.toArray(children).length - 1;
     hasPreviousStep.current = activeStep > 0;
 
-    const goToNextStep = React.useRef(() => {
+    const goToNextStep = React.useRef((stepIndex?: number) => {
       if (hasNextStep.current) {
-        setActiveStep((activeStep) => activeStep + 1);
+        setActiveStep((activeStep) => stepIndex ?? activeStep + 1);
       }
     });
 
-    const previousStep = React.useRef(() => {
+    const previousStep = React.useRef((step?: number) => {
       if (hasPreviousStep.current) {
-        setActiveStep((activeStep) => activeStep - 1);
+        setActiveStep((activeStep) => step ?? activeStep - 1);
       }
     });
 
@@ -33,14 +33,14 @@ const Wizard: React.FC<WizardProps> = React.memo(
       nextStepHandler.current = handler;
     });
 
-    const doNextStep = React.useRef(async () => {
+    const doNextStep = React.useRef(async (stepIndex?: number) => {
       if (hasNextStep.current && nextStepHandler.current) {
         try {
           setIsLoading(true);
           await nextStepHandler.current();
           setIsLoading(false);
           nextStepHandler.current = null;
-          goToNextStep.current();
+          goToNextStep.current(stepIndex);
         } catch (error) {
           setIsLoading(false);
           throw error;
