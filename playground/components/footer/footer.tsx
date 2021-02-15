@@ -1,10 +1,10 @@
 import { styled } from 'goober';
 import * as React from 'react';
 
-import { useWizard } from '../../dist';
-import { Button } from '../modules/common';
+import { useWizard } from '../../../dist';
+import { Button } from '../../modules/common';
 
-const Actions = styled('div')`
+export const Actions = styled('div')`
   display: flex;
   justify-content: center;
   margin: 1rem 0;
@@ -12,7 +12,7 @@ const Actions = styled('div')`
   flex-direction: row;
 `;
 
-const Info = styled('div')`
+export const Info = styled('div')`
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -32,7 +32,7 @@ const Info = styled('div')`
   }
 `;
 
-const Footer: React.FC = React.memo(() => {
+const Footer: React.FC = () => {
   const {
     nextStep,
     previousStep,
@@ -57,20 +57,20 @@ const Footer: React.FC = React.memo(() => {
         <Actions>
           <Button
             label="Previous"
-            onClick={previousStep}
+            onClick={() => previousStep()}
             disabled={isLoading || isFirstStep}
           >
             Previous
           </Button>
           <Button
             label="Next"
-            onClick={nextStep}
+            onClick={() => nextStep()}
             disabled={isLoading || isLastStep}
           />
         </Actions>
       </code>
     </>
   );
-});
+};
 
 export default Footer;
