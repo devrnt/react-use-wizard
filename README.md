@@ -50,8 +50,8 @@ const Step1 = () => {
 
   return (
     <>
-      <button onClick={previousStep}>Previous ⏮️</button>
-      <button onClick={nextStep}>Next ⏭</button>
+      <button onClick={() => previousStep()}>Previous ⏮️</button>
+      <button onClick={() => nextStep()}>Next ⏭</button>
     </>
   );
 };
@@ -164,8 +164,8 @@ const Step1 = () => {
     <>
       <p>Step 1</p>
       {isLoading && <p>loading...</p>}
-      <button onClick={previousStep}>Previous</button>
-      <button onClick={nextStep}>Next</button>
+      <button onClick={() => previousStep()}>Previous</button>
+      <button onClick={() => nextStep()}>Next</button>
       <div>
         Has next step: {!isLastStep ? '✅' : '⛔'}
         <br />
