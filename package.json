@@ -82,26 +82,26 @@
     "registry": "https://registry.npmjs.org"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.16",
-    "@babel/preset-env": "^7.12.16",
-    "@size-limit/preset-small-lib": "^4.9.2",
+    "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.13.12",
+    "@size-limit/preset-small-lib": "^4.10.1",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
-    "@testing-library/react-hooks": "^5.0.3",
-    "@types/react": "^17.0.2",
-    "@types/react-dom": "^17.0.1",
+    "@testing-library/react-hooks": "^5.1.0",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.2",
     "babel-jest": "^26.6.3",
-    "eslint-plugin-jsdoc": "^32.0.0",
+    "eslint-plugin-jsdoc": "^32.3.0",
     "eslint-plugin-promise": "^4.3.1",
     "eslint-plugin-simple-import-sort": "^7.0.0",
-    "husky": "^5.0.9",
+    "husky": "^5.2.0",
     "np": "^7.4.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-test-renderer": "^17.0.1",
-    "size-limit": "^4.9.2",
+    "size-limit": "^4.10.1",
     "tsdx": "^0.14.1",
     "tslib": "^2.1.0",
-    "typescript": "^4.1.5"
+    "typescript": "^4.2.3"
   }
 }
