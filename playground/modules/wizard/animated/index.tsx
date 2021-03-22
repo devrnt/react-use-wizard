@@ -16,8 +16,8 @@ const AnimatedSection: React.FC = () => {
             .fill(null)
             .map((_, index) => {
               return (
-                <AnimatedStep key={index} previousStep={previousStep}>
-                  <Step number={index} withCallback={false}></Step>
+                <AnimatedStep previousStep={previousStep}>
+                  <Step number={index + 1} withCallback={false}></Step>
                 </AnimatedStep>
               );
             })}
