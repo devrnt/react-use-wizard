@@ -30,7 +30,7 @@ yarn add react-use-wizard
 ```js
 import * as React from 'react';
 
-import { Wizard } from 'react-use-wizard';
+import { Wizard, useWizard } from 'react-use-wizard';
 
 const App = () => (
   <Wizard>
