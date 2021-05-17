@@ -10,7 +10,7 @@ const Wizard: React.FC<WizardProps> = React.memo(
     const [isLoading, setIsLoading] = React.useState(false);
     const hasNextStep = React.useRef(true);
     const hasPreviousStep = React.useRef(false);
-    const nextStepHandler = React.useRef<Handler>(() => Promise.resolve());
+    const nextStepHandler = React.useRef<Handler>(() => {});
 
     hasNextStep.current =
       activeStep < React.Children.toArray(children).length - 1;
@@ -94,9 +94,9 @@ const Wizard: React.FC<WizardProps> = React.memo(
     return (
       <WizardContext.Provider value={wizardValue}>
         <>
-          {header && header}
+          {header}
           {activeStepContent}
-          {footer && footer}
+          {footer}
         </>
       </WizardContext.Provider>
     );
