@@ -57,8 +57,8 @@ const Wizard: React.FC<WizardProps> = React.memo(
         handleStep: handleStep.current,
         isLoading,
         activeStep,
-        isFirstStep: Boolean(!hasPreviousStep.current),
-        isLastStep: Boolean(!hasNextStep.current),
+        isFirstStep: !hasPreviousStep.current,
+        isLastStep: !hasNextStep.current,
       }),
       [activeStep, isLoading],
     );
