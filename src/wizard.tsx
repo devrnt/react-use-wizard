@@ -10,7 +10,7 @@ const Wizard: React.FC<WizardProps> = React.memo(
     const [isLoading, setIsLoading] = React.useState(false);
     const hasNextStep = React.useRef(true);
     const hasPreviousStep = React.useRef(false);
-    const nextStepHandler = React.useRef<Handler>(() => Promise.resolve());
+    const nextStepHandler = React.useRef<Handler>(() => {});
 
     hasNextStep.current =
       activeStep < React.Children.toArray(children).length - 1;
@@ -22,7 +22,7 @@ const Wizard: React.FC<WizardProps> = React.memo(
       }
     });
 
-    const previousStep = React.useRef((step?: number) => {
+    const goToPreviousStep = React.useRef((step?: number) => {
       if (hasPreviousStep.current) {
         setActiveStep((activeStep) => step ?? activeStep - 1);
       }
@@ -53,12 +53,12 @@ const Wizard: React.FC<WizardProps> = React.memo(
     const wizardValue = React.useMemo(
       () => ({
         nextStep: doNextStep.current,
-        previousStep: previousStep.current,
+        previousStep: goToPreviousStep.current,
         handleStep: handleStep.current,
         isLoading,
         activeStep,
-        isFirstStep: Boolean(!hasPreviousStep.current),
-        isLastStep: Boolean(!hasNextStep.current),
+        isFirstStep: !hasPreviousStep.current,
+        isLastStep: !hasNextStep.current,
       }),
       [activeStep, isLoading],
     );
@@ -94,9 +94,9 @@ const Wizard: React.FC<WizardProps> = React.memo(
     return (
       <WizardContext.Provider value={wizardValue}>
         <>
-          {header && header}
+          {header}
           {activeStepContent}
-          {footer && footer}
+          {footer}
         </>
       </WizardContext.Provider>
     );
