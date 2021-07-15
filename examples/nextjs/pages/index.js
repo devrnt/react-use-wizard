@@ -33,10 +33,13 @@ const Footer = () => {
         </p>
       </div>
       <div>
-        <button onClick={previousStep} disabled={isLoading || isFirstStep}>
+        <button
+          onClick={() => previousStep()}
+          disabled={isLoading || isFirstStep}
+        >
           Previous
         </button>
-        <button onClick={nextStep} disabled={isLoading || isLastStep}>
+        <button onClick={() => nextStep()} disabled={isLoading || isLastStep}>
           Next
         </button>
       </div>
