@@ -99,52 +99,6 @@ describe('useWizard', () => {
     expect(result.current.isLastStep).toBe(true);
   });
 
-  test('should go to passed step index on next step', async () => {
-    const { result, waitForNextUpdate } = renderHook(() => useWizard(), {
-      wrapper: ({ children }) => (
-        <Wizard>
-          <p>step 1 {children}</p>
-          <p>step 2 {children}</p>
-          <p>step 3 {children}</p>
-        </Wizard>
-      ),
-    });
-
-    act(() => {
-      result.current.nextStep(2);
-    });
-
-    await waitForNextUpdate();
-
-    expect(result.current.isFirstStep).toBe(false);
-    expect(result.current.isLastStep).toBe(true);
-  });
-
-  test('should go to passed step index on next step with handler', async () => {
-    const callback = jest.fn();
-
-    const { result, waitForNextUpdate } = renderHook(() => useWizard(), {
-      wrapper: ({ children }) => (
-        <Wizard>
-          <p>step 1 {children}</p>
-          <p>step 2 {children}</p>
-          <p>step 3 {children}</p>
-        </Wizard>
-      ),
-    });
-
-    act(() => {
-      result.current.handleStep(callback);
-      result.current.nextStep(2);
-    });
-
-    await waitForNextUpdate();
-
-    expect(result.current.isFirstStep).toBe(false);
-    expect(result.current.isLastStep).toBe(true);
-    expect(callback).toBeCalled();
-  });
-
   test('should not go to previous step if first step', async () => {
     const { result } = renderUseWizardHook();
 
@@ -154,5 +108,29 @@ describe('useWizard', () => {
 
     // Wait for an element to appear
     expect(result.current.activeStep).toBe(0);
+  });
+
+  test('should go to given step index', async () => {
+    const { result } = renderUseWizardHook();
+
+    act(() => {
+      result.current.goToStep(1);
+    });
+
+    expect(result.current.activeStep).toBe(1);
+    expect(result.current.isFirstStep).toBe(false);
+    expect(result.current.isLastStep).toBe(true);
+  });
+
+  test('should not go to given step index when out of boundary', async () => {
+    const { result } = renderUseWizardHook();
+
+    act(() => {
+      result.current.goToStep(2);
+    });
+
+    expect(result.current.activeStep).toBe(0);
+    expect(result.current.isFirstStep).toBe(true);
+    expect(result.current.isLastStep).toBe(false);
   });
 });
