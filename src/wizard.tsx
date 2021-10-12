@@ -16,15 +16,34 @@ const Wizard: React.FC<WizardProps> = React.memo(
       activeStep < React.Children.toArray(children).length - 1;
     hasPreviousStep.current = activeStep > 0;
 
-    const goToNextStep = React.useRef((stepIndex?: number) => {
-      if (hasNextStep.current || stepIndex) {
-        setActiveStep((activeStep) => stepIndex ?? activeStep + 1);
+    const goToNextStep = React.useRef(() => {
+      if (hasNextStep.current) {
+        setActiveStep((activeStep) => activeStep + 1);
       }
     });
 
-    const goToPreviousStep = React.useRef((step?: number) => {
+    const goToPreviousStep = React.useRef(() => {
       if (hasPreviousStep.current) {
-        setActiveStep((activeStep) => step ?? activeStep - 1);
+        setActiveStep((activeStep) => activeStep - 1);
+      }
+    });
+
+    const goToStep = React.useRef((stepIndex: number) => {
+      if (
+        stepIndex > 0 &&
+        stepIndex < React.Children.toArray(children).length
+      ) {
+        setActiveStep(stepIndex);
+      } else {
+        if (__DEV__) {
+          logger.log(
+            'warn',
+            [
+              `Invalid step index [${stepIndex}] passed to 'goToStep'. `,
+              `Ensure the given stepIndex is not out of boundaries.`,
+            ].join(''),
+          );
+        }
       }
     });
 
@@ -33,20 +52,20 @@ const Wizard: React.FC<WizardProps> = React.memo(
       nextStepHandler.current = handler;
     });
 
-    const doNextStep = React.useRef(async (stepIndex?: number) => {
+    const doNextStep = React.useRef(async () => {
       if (hasNextStep.current && nextStepHandler.current) {
         try {
           setIsLoading(true);
           await nextStepHandler.current();
           setIsLoading(false);
           nextStepHandler.current = null;
-          goToNextStep.current(stepIndex);
+          goToNextStep.current();
         } catch (error) {
           setIsLoading(false);
           throw error;
         }
       } else {
-        goToNextStep.current(stepIndex);
+        goToNextStep.current();
       }
     });
 
@@ -59,6 +78,7 @@ const Wizard: React.FC<WizardProps> = React.memo(
         activeStep,
         isFirstStep: !hasPreviousStep.current,
         isLastStep: !hasNextStep.current,
+        goToStep: goToStep.current,
       }),
       [activeStep, isLoading],
     );
@@ -93,11 +113,9 @@ const Wizard: React.FC<WizardProps> = React.memo(
 
     return (
       <WizardContext.Provider value={wizardValue}>
-        <>
-          {header}
-          {activeStepContent}
-          {footer}
-        </>
+        {header}
+        {activeStepContent}
+        {footer}
       </WizardContext.Provider>
     );
   },

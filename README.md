@@ -120,8 +120,9 @@ Provide an optional `stepIndex` to either `nextStep` or `previousStep` to overwr
 
 | name         | type                       | description                                                                                                                                              |
 | ------------ | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| nextStep     | (stepIndex?: number) => Promise<void>        | Go to the next step. Overwrite the default behaviour by providing a step index                                                                                                                                      |
-| previousStep | (stepIndex?: number) => void                 | Go to the previous step. Overwrite the default behaviour by providing a step index                                                                                                                                  |
+| nextStep     | () => Promise<void>        | Go to the next step                                                                                                                              |
+| previousStep | () => void                 | Go to the previous step index                                                                                                                                  |
+| goToStep | (stepIndex: number) => void                 | Go to the given step index                                                                                                                                  |
 | handleStep   | (handler: Handler) => void | Attach a callback that will be called when calling `nextStep`.  `handler` can be either sync or async                                                     |
 | isLoading    | boolean                    | \* Will reflect the handler promise state: will be `true` if the handler promise is pending and `false` when the handler is either fulfilled or rejected |
 | activeStep   | number                     | The current active step of the wizard                                                                                                                    |
@@ -152,6 +153,7 @@ const Step1 = () => {
     activeStep,
     previousStep,
     nextStep,
+    goToStep,
     handleStep,
   } = useWizard();
 
@@ -166,13 +168,13 @@ const Step1 = () => {
       {isLoading && <p>loading...</p>}
       <button onClick={() => previousStep()}>Previous</button>
       <button onClick={() => nextStep()}>Next</button>
+      <button onClick={() => goToStep(2)}>Go to the last step</button>
       <div>
         Has next step: {!isLastStep ? '✅' : '⛔'}
         <br />
         Has previous step : {!isFirstStep ? '✅' : '⛔'}
       </div>
       Active step: {activeStep + 1} <br />
-    </>
   );
 };
 ```

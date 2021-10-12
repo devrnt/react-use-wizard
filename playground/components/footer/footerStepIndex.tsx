@@ -4,9 +4,9 @@ import { useWizard } from '../../../dist';
 import { Button } from '../../modules/common';
 import { Actions, Info } from './footer';
 
-const FooterCustomStepIndex: React.FC = () => {
+const FooterGoToStepIndex: React.FC = () => {
   const {
-    nextStep,
+    goToStep,
     previousStep,
     isLoading,
     activeStep,
@@ -35,8 +35,8 @@ const FooterCustomStepIndex: React.FC = () => {
             Previous
           </Button>
           <Button
-            label="Next"
-            onClick={() => nextStep(2)}
+            label="Go to step 3"
+            onClick={() => goToStep(2)}
             disabled={isLoading || isLastStep}
           />
         </Actions>
@@ -45,4 +45,4 @@ const FooterCustomStepIndex: React.FC = () => {
   );
 };
 
-export default FooterCustomStepIndex;
+export default FooterGoToStepIndex;
