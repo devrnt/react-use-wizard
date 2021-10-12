@@ -4,11 +4,11 @@ import { Wizard } from '../../../../dist';
 import { AsyncStep, FooterStepIndex, Step } from '../../../components';
 import Section from '../../common/section';
 
-const CustomNextStepIndex: React.FC = () => {
+const GoToStepIndex: React.FC = () => {
   return (
     <Section
-      title="Custom step index"
-      description="With custom step index on next step"
+      title="Go To Step"
+      description="Jump to given certain step index"
       showDivider={false}
     >
       <Wizard footer={<FooterStepIndex />}>
@@ -21,4 +21,4 @@ const CustomNextStepIndex: React.FC = () => {
   );
 };
 
-export default CustomNextStepIndex;
+export default GoToStepIndex;
