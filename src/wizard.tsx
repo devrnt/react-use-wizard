@@ -112,11 +112,9 @@ const Wizard: React.FC<WizardProps> = React.memo(
 
     return (
       <WizardContext.Provider value={wizardValue}>
-        <>
-          {header}
-          {activeStepContent}
-          {footer}
-        </>
+        {header}
+        {activeStepContent}
+        {footer}
       </WizardContext.Provider>
     );
   },
