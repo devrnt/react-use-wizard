@@ -33,6 +33,8 @@ const Wizard: React.FC<WizardProps> = React.memo(
         stepIndex > 0 &&
         stepIndex < React.Children.toArray(children).length
       ) {
+        setActiveStep(stepIndex);
+      } else {
         if (__DEV__) {
           logger.log(
             'warn',
@@ -42,7 +44,6 @@ const Wizard: React.FC<WizardProps> = React.memo(
             ].join(''),
           );
         }
-        setActiveStep(stepIndex);
       }
     });
 

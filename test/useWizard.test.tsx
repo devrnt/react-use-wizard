@@ -122,6 +122,21 @@ describe('useWizard', () => {
     expect(result.current.isLastStep).toBe(true);
   });
 
+  test('should go to given step index and not invoke `handleStep` handler', async () => {
+    const handler = jest.fn();
+    const { result } = renderUseWizardHook();
+
+    act(() => {
+      result.current.handleStep(handler);
+      result.current.goToStep(1);
+    });
+
+    expect(handler).not.toBeCalled();
+    expect(result.current.activeStep).toBe(1);
+    expect(result.current.isFirstStep).toBe(false);
+    expect(result.current.isLastStep).toBe(true);
+  });
+
   test('should not go to given step index when out of boundary', async () => {
     const { result } = renderUseWizardHook();
 
