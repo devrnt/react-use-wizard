@@ -30,7 +30,7 @@ const Wizard: React.FC<WizardProps> = React.memo(
 
     const goToStep = React.useRef((stepIndex: number) => {
       if (
-        stepIndex > 0 &&
+        stepIndex >= 0 &&
         stepIndex < React.Children.toArray(children).length
       ) {
         setActiveStep(stepIndex);

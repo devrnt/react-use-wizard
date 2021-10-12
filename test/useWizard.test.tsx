@@ -122,6 +122,18 @@ describe('useWizard', () => {
     expect(result.current.isLastStep).toBe(true);
   });
 
+  test('should go to given step index', async () => {
+    const { result } = renderUseWizardHook(1);
+
+    act(() => {
+      result.current.goToStep(0);
+    });
+
+    expect(result.current.activeStep).toBe(0);
+    expect(result.current.isFirstStep).toBe(true);
+    expect(result.current.isLastStep).toBe(false);
+  });
+
   test('should go to given step index and not invoke `handleStep` handler', async () => {
     const handler = jest.fn();
     const { result } = renderUseWizardHook();
