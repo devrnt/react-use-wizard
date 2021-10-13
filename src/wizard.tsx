@@ -10,7 +10,7 @@ const Wizard: React.FC<WizardProps> = React.memo(
     const [isLoading, setIsLoading] = React.useState(false);
     const hasNextStep = React.useRef(true);
     const hasPreviousStep = React.useRef(false);
-    const nextStepHandler = React.useRef<Handler>(() => {});
+    const nextStepHandler = React.useRef<Handler>(() => {return true});
 
     hasNextStep.current =
       activeStep < React.Children.toArray(children).length - 1;
@@ -37,10 +37,11 @@ const Wizard: React.FC<WizardProps> = React.memo(
       if (hasNextStep.current && nextStepHandler.current) {
         try {
           setIsLoading(true);
-          await nextStepHandler.current();
+          if (await nextStepHandler.current()) {
+            goToNextStep.current(stepIndex);
+          }
           setIsLoading(false);
           nextStepHandler.current = null;
-          goToNextStep.current(stepIndex);
         } catch (error) {
           setIsLoading(false);
           throw error;

@@ -1,4 +1,4 @@
-export type Handler = (() => Promise<void>) | (() => void) | null;
+export type Handler = (() => Promise<boolean>) | (() => boolean) | null;
 
 export type WizardProps = {
   /** Optional header that is shown above the active step */
@@ -28,7 +28,7 @@ export type WizardValues = {
    * @param handler Can be either sync or async
    *
    */
-  handleStep: (handler: Handler) => void;
+  handleStep: (handler: Handler) => boolean | void;
   /**
    * Indicate the current state of the handler
    *

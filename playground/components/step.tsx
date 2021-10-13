@@ -30,6 +30,7 @@ const Step: React.FC<Props> = React.memo(({ number, withCallback = true }) => {
   if (withCallback) {
     handleStep(() => {
       alert('Going to next step');
+      return true;
     });
   }
 

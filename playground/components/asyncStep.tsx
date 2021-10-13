@@ -38,15 +38,22 @@ const P = styled('p')`
 const AsyncStep: React.FC<Props> = React.memo(({ number }) => {
   const [mutate] = useMockMutation(MOCK);
   const { handleStep, isLoading } = useWizard();
-
   // Also works
   handleStep(async () => {
     await mutate();
+
+    // Now supports true / false wether or not it should actually navigate to next step
+    // depending on the mutate call. Maybe we get an error?
+    return true
   });
 
   // Alternative
   // handleStep(() => {
   //   return mutate();
+  //
+  // // Now supports true / false wether or not it should actually navigate to next step
+  // // depending on the mutate call. Maybe we get an error?
+  //   return true
   // });
 
   return (
