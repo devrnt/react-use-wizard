@@ -23,6 +23,12 @@ export type WizardValues = {
    *  */
   previousStep: (stepIndex?: number) => void;
   /**
+   * Set the current step
+   *
+   * @param stepIndex Overwrite the default behaviour by providing a step index
+   *  */
+  setStep: (stepIndex: number) => void;
+  /**
    * Attach a callback that will be called when calling `nextStep()`
    *
    * @param handler Can be either sync or async

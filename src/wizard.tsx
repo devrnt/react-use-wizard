@@ -28,6 +28,14 @@ const Wizard: React.FC<WizardProps> = React.memo(
       }
     });
 
+    const goToStep = React.useRef((step: number) => {
+      // Account for that array starts with 0 and when user inputs step they start at 1.
+      step -= 1;
+      if (step <= (React.Children.toArray(children).length - 1)) {
+        setActiveStep(() => step);
+      }
+    })
+
     // Callback to attach the step handler
     const handleStep = React.useRef((handler: Handler) => {
       nextStepHandler.current = handler;
@@ -54,6 +62,7 @@ const Wizard: React.FC<WizardProps> = React.memo(
       () => ({
         nextStep: doNextStep.current,
         previousStep: goToPreviousStep.current,
+        setStep: goToStep.current,
         handleStep: handleStep.current,
         isLoading,
         activeStep,
