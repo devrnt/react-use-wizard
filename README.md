@@ -112,8 +112,6 @@ Used to retrieve all methods and properties related to your wizard. Make sure `W
 
 `handleStep` is used to attach a handler to the step, can either be `async` or a `sync` function. This function will be invoked when calling `nextStep`.
 
-Provide an optional `stepIndex` to either `nextStep` or `previousStep` to overwrite the default "step-flow" behaviour.
-
 **Remark** - You can't use `useWizard` in the same component where `Wizard` is used.
 
 #### Methods
