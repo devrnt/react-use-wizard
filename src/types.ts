@@ -12,16 +12,12 @@ export type WizardProps = {
 export type WizardValues = {
   /**
    * Go to the next step
-   *
-   * @param stepIndex Overwrite the default behaviour by providing a step index
    */
-  nextStep: (stepIndex?: number) => Promise<void>;
+  nextStep: () => Promise<void>;
   /**
    * Go to the previous step
-   *
-   * @param stepIndex Overwrite the default behaviour by providing a step index
-   *  */
-  previousStep: (stepIndex?: number) => void;
+   */
+  previousStep: () => void;
   /**
    * Go to the given step index
    *
@@ -32,7 +28,6 @@ export type WizardValues = {
    * Attach a callback that will be called when calling `nextStep()`
    *
    * @param handler Can be either sync or async
-   *
    */
   handleStep: (handler: Handler) => void;
   /**
