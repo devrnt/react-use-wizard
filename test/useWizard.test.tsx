@@ -160,4 +160,21 @@ describe('useWizard', () => {
     expect(result.current.isFirstStep).toBe(true);
     expect(result.current.isLastStep).toBe(false);
   });
+
+  test('should thrown error on nextStep', async () => {
+    const { result } = renderUseWizardHook();
+
+    act(() => {
+      result.current.handleStep(() => {
+        return Promise.reject(Error('Gotcha'));
+      });
+
+      result.current.nextStep().catch((error) => {
+        expect(error).toEqual(Error('Gotcha'));
+        expect(result.error).toEqual(Error('Gotcha'));
+        expect(result.current.activeStep).toBe(0);
+        expect(result.current.isFirstStep).toBe(true);
+      });
+    });
+  });
 });
