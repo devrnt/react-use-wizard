@@ -162,7 +162,7 @@ describe('useWizard', () => {
   });
 
   test('should thrown error on async nextStep', async () => {
-    const { result } = renderUseWizardHook();
+    const { result, waitForNextUpdate } = renderUseWizardHook();
 
     act(() => {
       result.current.handleStep(() => {
@@ -171,14 +171,15 @@ describe('useWizard', () => {
 
       result.current.nextStep().catch((error) => {
         expect(error).toEqual(Error('Gotcha'));
-        expect(result.error).toEqual(Error('Gotcha'));
         expect(result.current.activeStep).toBe(0);
         expect(result.current.isFirstStep).toBe(true);
       });
     });
+
+    await waitForNextUpdate();
   });
 
-  test('should thrown error on sync nextStep', async () => {
+  test('should thrown error on sync nextStep', () => {
     const { result } = renderUseWizardHook();
 
     act(() => {
@@ -189,7 +190,6 @@ describe('useWizard', () => {
       try {
         result.current.nextStep();
       } catch (error) {
-        expect(error).toEqual(Error('Sync gotcha'));
         expect(error).toEqual(Error('Sync gotcha'));
         expect(result.current.activeStep).toBe(0);
         expect(result.current.isFirstStep).toBe(true);
