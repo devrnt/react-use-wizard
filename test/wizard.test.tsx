@@ -18,7 +18,7 @@ const ComponentWithHeader = (
 );
 
 const ComponentWithFooter = (
-  <Wizard header={<p>header</p>}>
+  <Wizard footer={<p>footer</p>}>
     <p>step 1</p>
     <p>step 2</p>
   </Wizard>
@@ -37,7 +37,7 @@ describe('Wizard', () => {
     expect(queryByText('step 2')).not.toBeInTheDocument();
   });
 
-  test('should render second step with passed `startIndex`', () => {
+  test('should render second step with `startIndex`', () => {
     const { queryByText } = render(
       <Wizard startIndex={1}>
         <p>step 1</p>
@@ -46,6 +46,7 @@ describe('Wizard', () => {
     );
 
     expect(queryByText('step 2')).toBeInTheDocument();
+    expect(queryByText('step 1')).not.toBeInTheDocument();
   });
 
   test('should render header', () => {
@@ -57,6 +58,6 @@ describe('Wizard', () => {
   test('should render footer', () => {
     const { queryByText } = render(ComponentWithFooter);
 
-    expect(queryByText('header')).toBeInTheDocument();
+    expect(queryByText('footer')).toBeInTheDocument();
   });
 });
