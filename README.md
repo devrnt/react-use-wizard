@@ -133,7 +133,7 @@ Used to retrieve all methods and properties related to your wizard. Make sure `W
 ```javascript
 import * as React from 'react';
 
-import { Wizard, useWiard } from 'react-use-wizard';
+import { Wizard, useWizard } from 'react-use-wizard';
 
 const App = () => (
   <Wizard>
