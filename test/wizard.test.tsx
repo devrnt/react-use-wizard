@@ -24,6 +24,13 @@ const ComponentWithFooter = (
   </Wizard>
 );
 
+const ComponentWithWrapper = (
+  <Wizard wrapper={<main />}>
+    <p>step 1</p>
+    <p>step 2</p>
+  </Wizard>
+);
+
 describe('Wizard', () => {
   test('should render first step', () => {
     const { queryByText } = render(Component);
@@ -59,5 +66,11 @@ describe('Wizard', () => {
     const { queryByText } = render(ComponentWithFooter);
 
     expect(queryByText('footer')).toBeInTheDocument();
+  });
+
+  test('should render wrapper', () => {
+    const { queryByRole } = render(ComponentWithWrapper);
+
+    expect(queryByRole('main')).toBeInTheDocument();
   });
 });
