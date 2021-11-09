@@ -10,19 +10,20 @@ const AnimatedSection: React.FC = () => {
 
   return (
     <Section title="Animated wizard" description="animation by framer motion">
-      <AnimatePresence>
-        <Wizard footer={<Footer />}>
-          {Array(4)
-            .fill(null)
-            .map((_, index) => {
-              return (
-                <AnimatedStep previousStep={previousStep}>
-                  <Step number={index + 1} withCallback={false}></Step>
-                </AnimatedStep>
-              );
-            })}
-        </Wizard>
-      </AnimatePresence>
+      <Wizard
+        footer={<Footer />}
+        wrapper={<AnimatePresence initial={false} exitBeforeEnter />}
+      >
+        {Array(4)
+          .fill(null)
+          .map((_, index) => {
+            return (
+              <AnimatedStep key={index} previousStep={previousStep}>
+                <Step number={index + 1} withCallback={false}></Step>
+              </AnimatedStep>
+            );
+          })}
+      </Wizard>
     </Section>
   );
 };
