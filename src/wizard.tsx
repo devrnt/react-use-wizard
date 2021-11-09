@@ -5,7 +5,7 @@ import { Handler, WizardProps } from './types';
 import WizardContext from './wizardContext';
 
 const Wizard: React.FC<WizardProps> = React.memo(
-  ({ header, footer, children, startIndex = 0 }) => {
+  ({ header, footer, children, wrapper: Wrapper, startIndex = 0 }) => {
     const [activeStep, setActiveStep] = React.useState(startIndex);
     const [isLoading, setIsLoading] = React.useState(false);
     const hasNextStep = React.useRef(true);
@@ -111,10 +111,18 @@ const Wizard: React.FC<WizardProps> = React.memo(
       return reactChildren[activeStep];
     }, [activeStep, children, header, footer]);
 
+    const enhancedActiveStepContent = React.useMemo(
+      () =>
+        Wrapper
+          ? React.cloneElement(Wrapper, { children: activeStepContent })
+          : activeStepContent,
+      [Wrapper, activeStepContent],
+    );
+
     return (
       <WizardContext.Provider value={wizardValue}>
         {header}
-        {activeStepContent}
+        {enhancedActiveStepContent}
         {footer}
       </WizardContext.Provider>
     );
