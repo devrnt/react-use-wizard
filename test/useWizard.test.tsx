@@ -31,6 +31,12 @@ describe('useWizard', () => {
     expect(result.current.activeStep).toBe(0);
   });
 
+  test('should set step count to two', () => {
+    const { result } = renderUseWizardHook();
+
+    expect(result.current.stepCount).toBe(2);
+  });
+
   test('should set active step to one', () => {
     const { result } = renderUseWizardHook(1);
 

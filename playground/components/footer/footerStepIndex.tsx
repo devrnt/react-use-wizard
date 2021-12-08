@@ -10,6 +10,7 @@ const FooterGoToStepIndex: React.FC = () => {
     previousStep,
     isLoading,
     activeStep,
+    stepCount,
     isLastStep,
     isFirstStep,
   } = useWizard();
@@ -24,6 +25,10 @@ const FooterGoToStepIndex: React.FC = () => {
           <br />
           <p>
             Active step: {activeStep + 1} <br />
+          </p>
+          <br />
+          <p>
+            Total steps: {stepCount} <br />
           </p>
         </Info>
         <Actions>
