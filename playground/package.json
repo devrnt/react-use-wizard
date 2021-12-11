@@ -1,7 +1,6 @@
 {
   "name": "playground",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
   "private": true,
   "homepage": "https://devrnt.github.io/react-use-wizard/",
