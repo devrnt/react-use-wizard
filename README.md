@@ -108,7 +108,7 @@ const App = () => {
 
 ### useWizard
 
-Used to retrieve all methods and properties related to your wizard. Make sure `Wizard` is wrapped around your component when calling `useWizard`. 
+Used to retrieve all methods and properties related to your wizard. Make sure `Wizard` is wrapped around your component when calling `useWizard`.
 
 `handleStep` is used to attach a handler to the step, can either be `async` or a `sync` function. This function will be invoked when calling `nextStep`.
 
@@ -116,16 +116,16 @@ Used to retrieve all methods and properties related to your wizard. Make sure `W
 
 #### Methods
 
-| name         | type                       | description                                                                                                                                              |
-| ------------ | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| nextStep     | () => Promise<void>        | Go to the next step                                                                                                                              |
-| previousStep | () => void                 | Go to the previous step index                                                                                                                                  |
-| goToStep | (stepIndex: number) => void                 | Go to the given step index                                                                                                                                  |
-| handleStep   | (handler: Handler) => void | Attach a callback that will be called when calling `nextStep`.  `handler` can be either sync or async                                                     |
-| isLoading    | boolean                    | \* Will reflect the handler promise state: will be `true` if the handler promise is pending and `false` when the handler is either fulfilled or rejected |
-| activeStep   | number                     | The current active step of the wizard                                                                                                                    |
-| isFirstStep  | boolean                    | Indicate if the current step is the first step (aka no previous step)                                                                                    |
-| isLastStep   | boolean                    | Indicate if the current step is the last step (aka no next step)                                                                                         |
+| name         | type                        | description                                                                                                                                              |
+| ------------ | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| nextStep     | () => Promise<void>         | Go to the next step                                                                                                                                      |
+| previousStep | () => void                  | Go to the previous step index                                                                                                                            |
+| goToStep     | (stepIndex: number) => void | Go to the given step index                                                                                                                               |
+| handleStep   | (handler: Handler) => void  | Attach a callback that will be called when calling `nextStep`. `handler` can be either sync or async                                                     |
+| isLoading    | boolean                     | \* Will reflect the handler promise state: will be `true` if the handler promise is pending and `false` when the handler is either fulfilled or rejected |
+| activeStep   | number                      | The current active step of the wizard                                                                                                                    |
+| isFirstStep  | boolean                     | Indicate if the current step is the first step (aka no previous step)                                                                                    |
+| isLastStep   | boolean                     | Indicate if the current step is the last step (aka no next step)                                                                                         |
 |              |
 
 #### Example
@@ -180,16 +180,20 @@ const Step1 = () => {
 It's recommended to pass the shared components to the `header` or `footer` in the `Wizard` to avoid duplication.
 
 ## Playground
+
 Small playground to showcase the functionalities of `react-use-wizard`:
 [https://devrnt.github.io/react-use-wizard/](https://devrnt.github.io/react-use-wizard/)
 
 Following use cases are available in the playground
- - Simple wizard with async and sync steps
- - Animated wizard with sync steps
- - Integration with [react-query](https://react-query.tanstack.com/) (mutation on next step)
 
- Source code can be found [here](https://github.com/devrnt/react-use-wizard/tree/main/playground).
+- Simple wizard with async and sync steps
+- Animated wizard with sync steps
+- Integration with [react-query](https://react-query.tanstack.com/) (mutation on next step)
+
+Source code can be found [here](https://github.com/devrnt/react-use-wizard/tree/main/playground).
+
 ## Examples
+
 Go to [examples](https://github.com/devrnt/react-use-wizard/tree/master/examples) to check out some integrations (Gatsby, NextJS...).
 
 ## Async
@@ -230,9 +234,10 @@ If an async function is attached to `handleStep` the `isLoading` property will i
 
 Since `react-use-wizard` is focused to manage the logic of a wizard it doesn't mean you can't add some animation by your own. Add any animation library that you like. I highly suggest [framer-motion](https://www.framer.com/motion/) to add your animations.
 
-Checkout this [example](https://github.com/devrnt/react-use-wizard/blob/main/playground/components/animatedStep.tsx) to see how a step can be animated with framer motion. 
+Checkout this [example](https://github.com/devrnt/react-use-wizard/blob/main/playground/components/animatedStep.tsx) to see how a step can be animated with framer motion.
 
 ## IE11
+
 Since Internet Explorer 11 doesn't support promises or async functions you'll need to install a polyfill for the `regenerator-runtime`.
 
-In general using [react-app-polyfill](https://www.npmjs.com/package/react-app-polyfill) is recommended, it includes polyfills for various browsers.  
+In general using [react-app-polyfill](https://www.npmjs.com/package/react-app-polyfill) is recommended, it includes polyfills for various browsers.
