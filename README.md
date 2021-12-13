@@ -150,6 +150,7 @@ const Step1 = () => {
     isLastStep,
     isFirstStep,
     activeStep,
+    stepCount,
     previousStep,
     nextStep,
     goToStep,
