@@ -124,6 +124,7 @@ Used to retrieve all methods and properties related to your wizard. Make sure `W
 | handleStep   | (handler: Handler) => void  | Attach a callback that will be called when calling `nextStep`. `handler` can be either sync or async                                                     |
 | isLoading    | boolean                     | \* Will reflect the handler promise state: will be `true` if the handler promise is pending and `false` when the handler is either fulfilled or rejected |
 | activeStep   | number                      | The current active step of the wizard                                                                                                                    |
+| stepCount    | number                      | The total number of steps of the wizard                                                                                                                  |
 | isFirstStep  | boolean                     | Indicate if the current step is the first step (aka no previous step)                                                                                    |
 | isLastStep   | boolean                     | Indicate if the current step is the last step (aka no next step)                                                                                         |
 |              |
@@ -149,6 +150,7 @@ const Step1 = () => {
     isLastStep,
     isFirstStep,
     activeStep,
+    stepCount,
     previousStep,
     nextStep,
     goToStep,

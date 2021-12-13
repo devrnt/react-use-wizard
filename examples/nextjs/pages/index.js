@@ -17,6 +17,7 @@ const Footer = () => {
     previousStep,
     isLoading,
     activeStep,
+    stepCount,
     isLastStep,
     isFirstStep,
   } = useWizard();
@@ -30,6 +31,10 @@ const Footer = () => {
         <br />
         <p>
           Active step: {activeStep + 1} <br />
+        </p>
+        <br />
+        <p>
+          Total steps: {stepCount} <br />
         </p>
       </div>
       <div>

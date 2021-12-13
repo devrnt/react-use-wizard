@@ -22,7 +22,7 @@ export const Info = styled('div')`
     margin: 0.25rem 0;
   }
 
-  @media screen and (min-width: 600px) {
+  @media screen and (min-width: 768px) {
     flex-direction: row;
     gap: 1rem;
 
@@ -38,6 +38,7 @@ const Footer: React.FC = () => {
     previousStep,
     isLoading,
     activeStep,
+    stepCount,
     isLastStep,
     isFirstStep,
   } = useWizard();
@@ -52,6 +53,10 @@ const Footer: React.FC = () => {
           <br />
           <p>
             Active step: {activeStep + 1} <br />
+          </p>
+          <br />
+          <p>
+            Total steps: {stepCount} <br />
           </p>
         </Info>
         <Actions>
