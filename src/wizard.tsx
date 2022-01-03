@@ -24,12 +24,14 @@ const Wizard: React.FC<WizardProps> = React.memo(
 
     const goToPreviousStep = React.useRef(() => {
       if (hasPreviousStep.current) {
+        nextStepHandler.current = null;
         setActiveStep((activeStep) => activeStep - 1);
       }
     });
 
     const goToStep = React.useRef((stepIndex: number) => {
       if (stepIndex >= 0 && stepIndex < stepCount) {
+        nextStepHandler.current = null;
         setActiveStep(stepIndex);
       } else {
         if (__DEV__) {
