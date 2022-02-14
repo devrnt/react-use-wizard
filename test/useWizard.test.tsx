@@ -12,6 +12,7 @@ const renderUseWizardHook = (initialStartIndex = 0) => {
     wrapper: ({ children, startIndex }) => (
       <Wizard startIndex={startIndex}>
         <p>step 1 {children}</p>
+        {false && <p>Optional step</p>}
         <p>step 2 {children}</p>
       </Wizard>
     ),
