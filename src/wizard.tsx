@@ -11,7 +11,7 @@ const Wizard: React.FC<WizardProps> = React.memo(
     const hasNextStep = React.useRef(true);
     const hasPreviousStep = React.useRef(false);
     const nextStepHandler = React.useRef<Handler>(() => {});
-    const stepCount = React.Children.count(children);
+    const stepCount = React.Children.toArray(children).length;
 
     hasNextStep.current = activeStep < stepCount - 1;
     hasPreviousStep.current = activeStep > 0;

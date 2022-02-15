@@ -12,6 +12,7 @@ const renderUseWizardHook = (initialStartIndex = 0) => {
     wrapper: ({ children, startIndex }) => (
       <Wizard startIndex={startIndex}>
         <p>step 1 {children}</p>
+        {false && <p>Optional step</p>}
         <p>step 2 {children}</p>
       </Wizard>
     ),
@@ -33,6 +34,20 @@ describe('useWizard', () => {
 
   test('should set step count to two', () => {
     const { result } = renderUseWizardHook();
+
+    expect(result.current.stepCount).toBe(2);
+  });
+
+  test('should set step count to one when using falsy step', () => {
+    const { result } = renderHook(() => useWizard(), {
+      wrapper: ({ children }) => (
+        <Wizard>
+          <p>step 1 {children}</p>
+          <p>step 2 {children}</p>
+          {false && <p>step 3 {children}</p>}
+        </Wizard>
+      ),
+    });
 
     expect(result.current.stepCount).toBe(2);
   });
