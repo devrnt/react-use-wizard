@@ -4,7 +4,7 @@ import * as logger from './logger';
 import { Handler, WizardProps } from './types';
 import WizardContext from './wizardContext';
 
-const Wizard: React.FC<WizardProps> = React.memo(
+const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
   ({ header, footer, children, startIndex = 0 }) => {
     const [activeStep, setActiveStep] = React.useState(startIndex);
     const [isLoading, setIsLoading] = React.useState(false);
