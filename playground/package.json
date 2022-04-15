@@ -9,7 +9,7 @@
     "build": "parcel build index.html --public-url /react-use-wizard/"
   },
   "dependencies": {
-    "framer-motion": "^4.0.0",
+    "framer-motion": "^4.1.17",
     "goober": "^2.0.35",
     "react-app-polyfill": "^2.0.0",
     "react-query": "^3.13.0"

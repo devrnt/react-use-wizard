@@ -7,6 +7,17 @@ export type WizardProps = {
   footer?: React.ReactNode;
   /** Optional start index @default 0 */
   startIndex?: number;
+  /**
+   * Optional wrapper that is exclusively wrapped around the active step component. It is not wrapped around the `header` and `footer`
+   *
+   * @example With `framer-motion` - `<AnimatePresence />`
+   * ```jsx
+   * <Wizard wrapper={<AnimatePresence exitBeforeEnter />}>
+   * ...
+   * </Wizard>
+   * ```
+   */
+  wrapper?: React.ReactElement;
 };
 
 export type WizardValues = {

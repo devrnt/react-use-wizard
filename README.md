@@ -84,6 +84,7 @@ Example: pass a footer component that contains a "previous" and "next" button to
 | startIndex | number          | Indicate the wizard to start at the given step             | ❌       | 0       |
 | header     | React.ReactNode | Header that is shown above the active step                 | ❌       |         |
 | footer     | React.ReactNode | Footer that is shown below the active stepstep             | ❌       |         |
+  | wrapper  | React.React.ReactElement | Optional wrapper that is exclusively wrapped around the active step component. It is not wrapped around the `header` and `footer`             | ❌       |         |
 | children   | React.ReactNode | Each child component will be treated as an individual step | ✔️       |
 
 #### Example
@@ -95,9 +96,17 @@ const Header = () => <p>I am the header component</p>;
 // Example: show the "previous" and "next" buttons in the footer
 const Footer = () => <p>I am the footer component</p>;
 
+// Example: Wrap steps in an `<AnimatePresence` from framer-motion 
+const Wrapper = () => <AnimatePresence exitBeforeEnter />;
+
 const App = () => {
   return (
-    <Wizard startIndex={0} header={<Header />} footer={<Footer />}>
+    <Wizard 
+        startIndex={0}
+        header={<Header />}
+        footer={<Footer />}
+        wrapper={<Wrapper />}
+      >
       <Step1 />
       <Step2 />
       <Step3 />
@@ -236,7 +245,7 @@ If an async function is attached to `handleStep` the `isLoading` property will i
 
 Since `react-use-wizard` is focused to manage the logic of a wizard it doesn't mean you can't add some animation by your own. Add any animation library that you like. I highly suggest [framer-motion](https://www.framer.com/motion/) to add your animations.
 
-Checkout this [example](https://github.com/devrnt/react-use-wizard/blob/main/playground/components/animatedStep.tsx) to see how a step can be animated with framer motion.
+Checkout this [example](https://github.com/devrnt/react-use-wizard/tree/feat/wizard-wrapper/playground/modules/wizard/animated) to see how a step can be animated with framer motion.
 
 ## IE11
 
