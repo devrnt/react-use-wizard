@@ -38,8 +38,6 @@ const AnimatedStep: React.FC<Props> = React.memo(
       };
     }, [activeStep, previousStepIndex]);
 
-    console.log(activeStep, previousStepIndex.current);
-
     return (
       <motion.div
         custom={activeStep - previousStepIndex.current}

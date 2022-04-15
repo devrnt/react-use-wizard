@@ -12,6 +12,7 @@ const renderUseWizardHook = (initialStartIndex = 0) => {
     wrapper: ({ children, startIndex }) => (
       <Wizard startIndex={startIndex}>
         <p>step 1 {children}</p>
+        {false && <p>Optional step</p>}
         <p>step 2 {children}</p>
       </Wizard>
     ),
@@ -30,6 +31,29 @@ describe('useWizard', () => {
 
     expect(result.current.activeStep).toBe(0);
   });
+
+  test('should set step count to two', () => {
+    const { result } = renderUseWizardHook();
+
+    expect(result.current.stepCount).toBe(2);
+  });
+
+  test.each([false, null, undefined])(
+    'should set step count to two when using %s as step',
+    (value) => {
+      const { result } = renderHook(() => useWizard(), {
+        wrapper: ({ children }) => (
+          <Wizard>
+            <p>step 1 {children}</p>
+            <p>step 2 {children}</p>
+            {value && <p>step 3 {children}</p>}
+          </Wizard>
+        ),
+      });
+
+      expect(result.current.stepCount).toBe(2);
+    },
+  );
 
   test('should set active step to one', () => {
     const { result } = renderUseWizardHook(1);
@@ -152,13 +176,15 @@ describe('useWizard', () => {
   test('should not go to given step index when out of boundary', async () => {
     const { result } = renderUseWizardHook();
 
-    act(() => {
-      result.current.goToStep(2);
-    });
-
-    expect(result.current.activeStep).toBe(0);
-    expect(result.current.isFirstStep).toBe(true);
-    expect(result.current.isLastStep).toBe(false);
+    try {
+      act(() => {
+        result.current.goToStep(2);
+      });
+    } catch (error) {
+      expect(result.current.activeStep).toBe(0);
+      expect(result.current.isFirstStep).toBe(true);
+      expect(result.current.isLastStep).toBe(false);
+    }
   });
 
   test('should thrown error on async nextStep', async () => {
@@ -179,16 +205,18 @@ describe('useWizard', () => {
     await waitForNextUpdate();
   });
 
-  test('should thrown error on sync nextStep', () => {
+  test('should throw error on sync nextStep', async () => {
     const { result } = renderUseWizardHook();
 
     act(() => {
       result.current.handleStep(() => {
         throw Error('Sync gotcha');
       });
+    });
 
+    await act(async () => {
       try {
-        result.current.nextStep();
+        await result.current.nextStep();
       } catch (error) {
         expect(error).toEqual(Error('Sync gotcha'));
         expect(result.current.activeStep).toBe(0);

@@ -50,6 +50,8 @@ export type WizardValues = {
   isLoading: boolean;
   /** The current active step of the wizard */
   activeStep: number;
+  /** The total number of steps of the wizard */
+  stepCount: number;
   /** Indicate if the current step is the first step (aka no previous step) */
   isFirstStep: boolean;
   /** Indicate if the current step is the last step (aka no next step) */

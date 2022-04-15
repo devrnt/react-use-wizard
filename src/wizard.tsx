@@ -4,16 +4,16 @@ import * as logger from './logger';
 import { Handler, WizardProps } from './types';
 import WizardContext from './wizardContext';
 
-const Wizard: React.FC<WizardProps> = React.memo(
+const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
   ({ header, footer, children, wrapper: Wrapper, startIndex = 0 }) => {
     const [activeStep, setActiveStep] = React.useState(startIndex);
     const [isLoading, setIsLoading] = React.useState(false);
     const hasNextStep = React.useRef(true);
     const hasPreviousStep = React.useRef(false);
     const nextStepHandler = React.useRef<Handler>(() => {});
+    const stepCount = React.Children.toArray(children).length;
 
-    hasNextStep.current =
-      activeStep < React.Children.toArray(children).length - 1;
+    hasNextStep.current = activeStep < stepCount - 1;
     hasPreviousStep.current = activeStep > 0;
 
     const goToNextStep = React.useRef(() => {
@@ -24,15 +24,14 @@ const Wizard: React.FC<WizardProps> = React.memo(
 
     const goToPreviousStep = React.useRef(() => {
       if (hasPreviousStep.current) {
+        nextStepHandler.current = null;
         setActiveStep((activeStep) => activeStep - 1);
       }
     });
 
     const goToStep = React.useRef((stepIndex: number) => {
-      if (
-        stepIndex >= 0 &&
-        stepIndex < React.Children.toArray(children).length
-      ) {
+      if (stepIndex >= 0 && stepIndex < stepCount) {
+        nextStepHandler.current = null;
         setActiveStep(stepIndex);
       } else {
         if (__DEV__) {
@@ -76,11 +75,12 @@ const Wizard: React.FC<WizardProps> = React.memo(
         handleStep: handleStep.current,
         isLoading,
         activeStep,
+        stepCount,
         isFirstStep: !hasPreviousStep.current,
         isLastStep: !hasNextStep.current,
         goToStep: goToStep.current,
       }),
-      [activeStep, isLoading],
+      [activeStep, stepCount, isLoading],
     );
 
     const activeStepContent = React.useMemo(() => {
