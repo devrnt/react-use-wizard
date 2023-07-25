@@ -3,11 +3,11 @@
   "author": "devrnt <me@jonasdevrient.be>",
   "description": "React wizard (stepper) builder without the hassle, powered by hooks.",
   "homepage": "https://github.com/devrnt/react-use-wizard#readme",
-  "module": "dist/react-use-wizard.esm.js",
+  "module": "dist/react-use-wizard.mjs",
   "version": "2.2.1",
   "license": "MIT",
   "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "types": "dist/index.d.ts",
   "sideEffects": false,
   "repository": {
     "type": "git",
@@ -25,8 +25,8 @@
   },
   "exports": {
     ".": {
-      "browser": "./dist/react-use-wizard.esm.js",
-      "import": "./dist/react-use-wizard.esm.js",
+      "browser": "./dist/react-use-wizard.mjs",
+      "import": "./dist/react-use-wizard.mjs",
       "require": "./dist/index.js"
     }
   },
