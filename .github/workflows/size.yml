@@ -6,7 +6,20 @@ jobs:
     env:
       CI_JOB_NUMBER: 1
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '18.x'
+
+      - name: Install deps and build (with cache)
+        uses: bahmutov/npm-install@v1
+        with:
+          install-command: yarn install --ignore-engines
+
       - uses: andresz1/size-limit-action@v1
         with:
+          skip_step: install
           github_token: ${{ secrets.GITHUB_TOKEN }}
