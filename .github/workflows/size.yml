@@ -19,7 +19,7 @@ jobs:
         with:
           install-command: yarn install --ignore-engines
 
-      - uses: andresz1/size-limit-action@v1
+      - uses: preactjs/compressed-size-action@v2
         with:
-          skip_step: install
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token: '${{ secrets.GITHUB_TOKEN }}'
+          pattern: "**/dist/**/*.?(m)js"
