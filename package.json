@@ -95,7 +95,7 @@
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "husky": "^7.0.2",
-    "np": "^7.5.0",
+    "np": "^8.0.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-test-renderer": "^17.0.2",
