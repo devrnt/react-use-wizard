@@ -2,13 +2,12 @@ name: CI
 on: [push, pull_request]
 jobs:
   build:
-    name: Build, lint, and test on Node ${{ matrix.node }} and ${{ matrix.os }}
+    name: Build, lint, and test on Node ${{ matrix.node }}
 
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
         node: ['16.x', '18.x']
-        os: [ubuntu-20.04]
 
     steps:
       - name: Checkout repo
