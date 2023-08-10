@@ -184,6 +184,7 @@ const Step1 = () => {
         Has previous step : {!isFirstStep ? '✅' : '⛔'}
       </div>
       Active step: {activeStep + 1} <br />
+    </>
   );
 };
 ```
