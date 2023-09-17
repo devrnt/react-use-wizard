@@ -19,6 +19,25 @@ const renderUseWizardHook = (initialStartIndex = 0) => {
   });
 };
 
+const renderUseWizardHookWithDynamicSteps = (initialNumSteps: number) => {
+  return renderHook(() => useWizard(), {
+    initialProps: {
+      numSteps: initialNumSteps,
+    },
+    wrapper: ({ numSteps, children }) => (
+      <Wizard>
+        {Array(numSteps)
+          .fill(null)
+          .map((_, index) => (
+            <p key={index}>
+              step {index + 1} {children}
+            </p>
+          ))}
+      </Wizard>
+    ),
+  });
+};
+
 describe('useWizard', () => {
   test('should be available when wrapped in wizard', () => {
     const { result } = renderUseWizardHook();
@@ -54,6 +73,41 @@ describe('useWizard', () => {
       expect(result.current.stepCount).toBe(2);
     },
   );
+
+  test('should update step count with dynamic steps', async () => {
+    const { result, rerender } = renderUseWizardHookWithDynamicSteps(1);
+
+    expect(result.current.stepCount).toBe(1);
+    expect(result.current.isLastStep).toBe(true);
+
+    rerender({ numSteps: 2 });
+
+    expect(result.current.stepCount).toBe(2);
+    expect(result.current.isLastStep).toBe(false);
+  });
+
+  test('active step should change if current step is removed', async () => {
+    const {
+      result,
+      rerender,
+      waitForNextUpdate,
+    } = renderUseWizardHookWithDynamicSteps(1);
+
+    expect(result.current.stepCount).toBe(1);
+
+    rerender({ numSteps: 2 });
+
+    act(() => {
+      result.current.nextStep();
+    });
+    await waitForNextUpdate();
+
+    expect(result.current.activeStep).toBe(1);
+    expect(result.current.isLastStep).toBe(true);
+
+    rerender({ numSteps: 1 });
+    expect(result.current.activeStep).toBe(0);
+  });
 
   test('should set active step to one', () => {
     const { result } = renderUseWizardHook(1);
