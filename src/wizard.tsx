@@ -15,10 +15,26 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
       React.Children.toArray(children).length,
     );
 
+    // Disable exhaustive-deps warning for this effect.
+    // The reason is because we only want this effect to run
+    // when the number of children changes, and not also when activeStep changes.
+    /* eslint-disable react-hooks/exhaustive-deps */
     React.useEffect(() => {
       const newCount = React.Children.toArray(children).length;
       setStepCount(newCount);
+
+      if (activeStep >= newCount) {
+        setActiveStep(newCount - 1);
+
+        if (__DEV__) {
+          logger.log(
+            'warn',
+            `Number of steps have been changed to ${newCount} while activeStep exceeds the new count. The last step will be actived.`,
+          );
+        }
+      }
     }, [children]);
+    /* eslint-enable react-hooks/exhaustive-deps */
 
     hasNextStep.current = activeStep < stepCount - 1;
     hasPreviousStep.current = activeStep > 0;
