@@ -17,7 +17,7 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
 
     // Disable exhaustive-deps warning for this effect.
     // The reason is because we only want this effect to run
-    // when the number of children changes, and not also when activeStep changes.
+    // when the children changes, and not also when activeStep changes.
     /* eslint-disable react-hooks/exhaustive-deps */
     React.useEffect(() => {
       const newCount = React.Children.toArray(children).length;
