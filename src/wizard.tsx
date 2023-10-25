@@ -5,7 +5,14 @@ import { Handler, WizardProps } from './types';
 import WizardContext from './wizardContext';
 
 const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
-  ({ header, footer, children, wrapper: Wrapper, startIndex = 0 }) => {
+  ({
+    header,
+    footer,
+    children,
+    onIndexChange,
+    wrapper: Wrapper,
+    startIndex = 0,
+  }) => {
     const [activeStep, setActiveStep] = React.useState(startIndex);
     const [isLoading, setIsLoading] = React.useState(false);
     const hasNextStep = React.useRef(true);
@@ -15,6 +22,12 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
 
     hasNextStep.current = activeStep < stepCount - 1;
     hasPreviousStep.current = activeStep > 0;
+
+    React.useEffect(() => {
+      if (onIndexChange) {
+        onIndexChange(activeStep);
+      }
+    }, [activeStep, onIndexChange]);
 
     const goToNextStep = React.useRef(() => {
       if (hasNextStep.current) {

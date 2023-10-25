@@ -18,6 +18,7 @@ export type WizardProps = {
    * ```
    */
   wrapper?: React.ReactElement;
+  onIndexChange?: (stepIndex: number) => void;
 };
 
 export type WizardValues = {
