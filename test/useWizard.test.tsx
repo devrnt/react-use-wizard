@@ -224,4 +224,56 @@ describe('useWizard', () => {
       }
     });
   });
+
+  test('should update step count when dynamic step is added', () => {
+    const steps = ['one', 'two', 'three'];
+
+    const { result, rerender } = renderHook(() => useWizard(), {
+      initialProps: {
+        startIndex: 0,
+      },
+      wrapper: ({ children, startIndex }) => (
+        <Wizard startIndex={startIndex}>
+          {steps.map((step) => (
+            <p key={step}>{children}</p>
+          ))}
+        </Wizard>
+      ),
+    });
+
+    expect(result.current.stepCount).toBe(3);
+
+    steps.push('four');
+    rerender();
+
+    expect(result.current.stepCount).toBe(4);
+  });
+
+  test('should go to step index of dynamic step', () => {
+    const steps = ['one', 'two', 'three'];
+
+    const { result, rerender } = renderHook(() => useWizard(), {
+      initialProps: {
+        startIndex: 0,
+      },
+      wrapper: ({ children, startIndex }) => (
+        <Wizard startIndex={startIndex}>
+          {steps.map((step) => (
+            <p key={step}>{children}</p>
+          ))}
+        </Wizard>
+      ),
+    });
+
+    steps.push('four');
+    rerender();
+
+    act(() => {
+      result.current.goToStep(3);
+    });
+
+    expect(result.current.activeStep).toBe(3);
+    expect(result.current.isFirstStep).toBe(false);
+    expect(result.current.isLastStep).toBe(true);
+  });
 });
