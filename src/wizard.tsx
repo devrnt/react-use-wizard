@@ -29,22 +29,25 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
       }
     });
 
-    const goToStep = React.useRef((stepIndex: number) => {
-      if (stepIndex >= 0 && stepIndex < stepCount) {
-        nextStepHandler.current = null;
-        setActiveStep(stepIndex);
-      } else {
-        if (__DEV__) {
-          logger.log(
-            'warn',
-            [
-              `Invalid step index [${stepIndex}] passed to 'goToStep'. `,
-              `Ensure the given stepIndex is not out of boundaries.`,
-            ].join(''),
-          );
+    const goToStep = React.useCallback(
+      (stepIndex: number) => {
+        if (stepIndex >= 0 && stepIndex < stepCount) {
+          nextStepHandler.current = null;
+          setActiveStep(stepIndex);
+        } else {
+          if (__DEV__) {
+            logger.log(
+              'warn',
+              [
+                `Invalid step index [${stepIndex}] passed to 'goToStep'. `,
+                `Ensure the given stepIndex is not out of boundaries.`,
+              ].join(''),
+            );
+          }
         }
-      }
-    });
+      },
+      [stepCount],
+    );
 
     // Callback to attach the step handler
     const handleStep = React.useRef((handler: Handler) => {
@@ -78,9 +81,9 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
         stepCount,
         isFirstStep: !hasPreviousStep.current,
         isLastStep: !hasNextStep.current,
-        goToStep: goToStep.current,
+        goToStep,
       }),
-      [activeStep, stepCount, isLoading],
+      [isLoading, activeStep, stepCount, goToStep],
     );
 
     const activeStepContent = React.useMemo(() => {
