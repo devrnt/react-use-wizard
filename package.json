@@ -58,7 +58,8 @@
     "prepare": "tsdx build",
     "size": "tsdx build && size-limit",
     "analyze": "size-limit --why",
-    "release": "np"
+    "release": "np",
+    "postinstall": "tsdx build"
   },
   "peerDependencies": {
     "react": ">=16.8.0",
