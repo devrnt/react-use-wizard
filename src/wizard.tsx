@@ -27,7 +27,7 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
       if (onIndexChange) {
         onIndexChange(activeStep);
       }
-    }, [activeStep, onIndexChange]);
+    }, [activeStep]);
 
     const goToNextStep = React.useRef(() => {
       if (hasNextStep.current) {
