@@ -84,6 +84,7 @@ Example: pass a footer component that contains a "previous" and "next" button to
 | startIndex | number          | Indicate the wizard to start at the given step             | ❌       | 0       |
 | header     | React.ReactNode | Header that is shown above the active step                 | ❌       |         |
 | footer     | React.ReactNode | Footer that is shown below the active stepstep             | ❌       |         |
+| onStepChange     | (stepIndex) | Callback that will be invoked with the new step index when the wizard changes steps             | ❌       |         |
   | wrapper  | React.React.ReactElement | Optional wrapper that is exclusively wrapped around the active step component. It is not wrapped around the `header` and `footer`             | ❌       |         |
 | children   | React.ReactNode | Each child component will be treated as an individual step | ✔️       |
 
