@@ -7,7 +7,10 @@ import Section from '../../common/section';
 const SimpleSection: React.FC = () => {
   return (
     <Section title="Simple wizard" description="mix of async and sync steps">
-      <Wizard footer={<Footer />}>
+      <Wizard
+        footer={<Footer />}
+        onStepChange={(stepIndex) => alert(`New step index is ${stepIndex}`)}
+      >
         <AsyncStep number={1} />
         <Step number={2} />
         <AsyncStep number={3} />

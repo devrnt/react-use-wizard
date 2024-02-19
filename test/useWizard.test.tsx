@@ -276,4 +276,58 @@ describe('useWizard', () => {
     expect(result.current.isFirstStep).toBe(false);
     expect(result.current.isLastStep).toBe(true);
   });
+
+  describe('onStepChange()', () => {
+    const renderUseWizardHook = (
+      onStepChange: (index: number) => void,
+      startIndex = 0,
+    ) => {
+      return renderHook(() => useWizard(), {
+        initialProps: {
+          startIndex,
+          onStepChange,
+        },
+        wrapper: ({ children, startIndex, onStepChange }) => (
+          <Wizard startIndex={startIndex} onStepChange={onStepChange}>
+            <p>step 1 {children}</p>
+            <p>step 2 {children}</p>
+            <p>step 3 {children}</p>
+          </Wizard>
+        ),
+      });
+    };
+
+    test('should invoke onStepChange when nextStep is called', async () => {
+      const onStepChange = jest.fn();
+      const { result, waitForNextUpdate } = renderUseWizardHook(onStepChange);
+
+      result.current.nextStep();
+
+      await waitForNextUpdate();
+
+      expect(onStepChange).toHaveBeenCalledWith(1);
+    });
+
+    test('should invoke onStepChange when previousStep is called', async () => {
+      const onStepChange = jest.fn();
+      const { result } = renderUseWizardHook(onStepChange, 1);
+
+      act(() => {
+        result.current.previousStep();
+      });
+
+      expect(onStepChange).toHaveBeenCalledWith(0);
+    });
+
+    test('should invoke onStepChange when goToStep is called', async () => {
+      const onStepChange = jest.fn();
+      const { result } = renderUseWizardHook(onStepChange);
+
+      act(() => {
+        result.current.goToStep(1);
+      });
+
+      expect(onStepChange).toHaveBeenCalledWith(1);
+    });
+  });
 });

@@ -9,7 +9,6 @@ export type WizardProps = {
   startIndex?: number;
   /**
    * Optional wrapper that is exclusively wrapped around the active step component. It is not wrapped around the `header` and `footer`
-   *
    * @example With `framer-motion` - `<AnimatePresence />`
    * ```jsx
    * <Wizard wrapper={<AnimatePresence exitBeforeEnter />}>
@@ -18,6 +17,8 @@ export type WizardProps = {
    * ```
    */
   wrapper?: React.ReactElement;
+  /** Callback that will be invoked with the new step index when the wizard changes steps */
+  onStepChange?: (stepIndex: number) => void;
 };
 
 export type WizardValues = {
@@ -31,13 +32,11 @@ export type WizardValues = {
   previousStep: () => void;
   /**
    * Go to the given step index
-   *
    * @param stepIndex The step index, starts at 0
    */
   goToStep: (stepIndex: number) => void;
   /**
    * Attach a callback that will be called when calling `nextStep()`
-   *
    * @param handler Can be either sync or async
    */
   handleStep: (handler: Handler) => void;

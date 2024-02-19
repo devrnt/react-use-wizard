@@ -5,7 +5,14 @@ import { Handler, WizardProps } from './types';
 import WizardContext from './wizardContext';
 
 const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
-  ({ header, footer, children, wrapper: Wrapper, startIndex = 0 }) => {
+  ({
+    header,
+    footer,
+    children,
+    onStepChange,
+    wrapper: Wrapper,
+    startIndex = 0,
+  }) => {
     const [activeStep, setActiveStep] = React.useState(startIndex);
     const [isLoading, setIsLoading] = React.useState(false);
     const hasNextStep = React.useRef(true);
@@ -16,24 +23,31 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
     hasNextStep.current = activeStep < stepCount - 1;
     hasPreviousStep.current = activeStep > 0;
 
-    const goToNextStep = React.useRef(() => {
+    const goToNextStep = React.useCallback(() => {
       if (hasNextStep.current) {
-        setActiveStep((activeStep) => activeStep + 1);
-      }
-    });
+        const newActiveStepIndex = activeStep + 1;
 
-    const goToPreviousStep = React.useRef(() => {
+        setActiveStep(newActiveStepIndex);
+        onStepChange?.(newActiveStepIndex);
+      }
+    }, [activeStep, onStepChange]);
+
+    const goToPreviousStep = React.useCallback(() => {
       if (hasPreviousStep.current) {
         nextStepHandler.current = null;
-        setActiveStep((activeStep) => activeStep - 1);
+        const newActiveStepIndex = activeStep - 1;
+
+        setActiveStep(newActiveStepIndex);
+        onStepChange?.(newActiveStepIndex);
       }
-    });
+    }, [activeStep, onStepChange]);
 
     const goToStep = React.useCallback(
       (stepIndex: number) => {
         if (stepIndex >= 0 && stepIndex < stepCount) {
           nextStepHandler.current = null;
           setActiveStep(stepIndex);
+          onStepChange?.(stepIndex);
         } else {
           if (__DEV__) {
             logger.log(
@@ -46,7 +60,7 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
           }
         }
       },
-      [stepCount],
+      [stepCount, onStepChange],
     );
 
     // Callback to attach the step handler
@@ -54,27 +68,27 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
       nextStepHandler.current = handler;
     });
 
-    const doNextStep = React.useRef(async () => {
+    const doNextStep = React.useCallback(async () => {
       if (hasNextStep.current && nextStepHandler.current) {
         try {
           setIsLoading(true);
           await nextStepHandler.current();
           setIsLoading(false);
           nextStepHandler.current = null;
-          goToNextStep.current();
+          goToNextStep();
         } catch (error) {
           setIsLoading(false);
           throw error;
         }
       } else {
-        goToNextStep.current();
+        goToNextStep();
       }
-    });
+    }, [goToNextStep]);
 
     const wizardValue = React.useMemo(
       () => ({
-        nextStep: doNextStep.current,
-        previousStep: goToPreviousStep.current,
+        nextStep: doNextStep,
+        previousStep: goToPreviousStep,
         handleStep: handleStep.current,
         isLoading,
         activeStep,
@@ -83,7 +97,14 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
         isLastStep: !hasNextStep.current,
         goToStep,
       }),
-      [isLoading, activeStep, stepCount, goToStep],
+      [
+        doNextStep,
+        goToPreviousStep,
+        isLoading,
+        activeStep,
+        stepCount,
+        goToStep,
+      ],
     );
 
     const activeStepContent = React.useMemo(() => {
