@@ -6,6 +6,7 @@ import { useMockMutation } from '../hooks';
 
 type Props = {
   number: number;
+  name?: string;
 };
 
 const MOCK = [

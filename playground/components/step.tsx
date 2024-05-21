@@ -6,6 +6,7 @@ import { useWizard } from '../../dist';
 type Props = {
   number: number;
   withCallback?: boolean;
+  name?: string;
 };
 
 const Container = styled('div')`
