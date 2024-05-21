@@ -13,6 +13,7 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
     onStepChange,
     wrapper: Wrapper,
     startIndex = 0,
+    sidebarAndStepWrapper: SidebarAndStepWrapper,
   }) => {
     const [activeStep, setActiveStep] = React.useState(startIndex);
     const [isLoading, setIsLoading] = React.useState(false);
@@ -163,11 +164,33 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
       [Wrapper, activeStepContent],
     );
 
+    const enhancedActiveStepContentWithSidebar = React.useMemo(
+      () =>
+        SidebarAndStepWrapper ? (
+          React.cloneElement(SidebarAndStepWrapper, {
+            children: (
+              <>
+                {sidebar}
+                {enhancedActiveStepContent}
+              </>
+            ),
+          })
+        ) : (
+          <>
+            {sidebar}
+            {enhancedActiveStepContent}
+          </>
+        ),
+      [SidebarAndStepWrapper, sidebar, enhancedActiveStepContent],
+    );
+
     return (
       <WizardContext.Provider value={wizardValue}>
         {header}
-        {sidebar}
-        {enhancedActiveStepContent}
+        {sidebar
+          ? enhancedActiveStepContentWithSidebar
+          : enhancedActiveStepContent}
+
         {footer}
       </WizardContext.Provider>
     );
