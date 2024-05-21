@@ -83,9 +83,11 @@ Example: pass a footer component that contains a "previous" and "next" button to
 | ---------- | --------------- | ---------------------------------------------------------- | -------- | ------- |
 | startIndex | number          | Indicate the wizard to start at the given step             | ❌       | 0       |
 | header     | React.ReactNode | Header that is shown above the active step                 | ❌       |         |
+| sidebar    | React.ReactNode | Sidebar that is shown after the header, before the active step | ❌   |         |
 | footer     | React.ReactNode | Footer that is shown below the active stepstep             | ❌       |         |
 | onStepChange     | (stepIndex) | Callback that will be invoked with the new step index when the wizard changes steps             | ❌       |         |
-  | wrapper  | React.React.ReactElement | Optional wrapper that is exclusively wrapped around the active step component. It is not wrapped around the `header` and `footer`             | ❌       |         |
+| wrapper    | React.React.ReactElement | Optional wrapper that is exclusively wrapped around the active step component. It is not wrapped around the `header`, `sidebar` and `footer` | ❌       |         |
+| sidebarAndStepWrapper | React.React.ReactElement | Optional wrapper that is exclusively wrapped around the sidebar and active step component. It is not wrapped around the `header` and `footer` | ❌       |         |
 | children   | React.ReactNode | Each child component will be treated as an individual step | ✔️       |
 
 #### Example
@@ -94,19 +96,27 @@ Example: pass a footer component that contains a "previous" and "next" button to
 // Example: show the active step in the header
 const Header = () => <p>I am the header component</p>;
 
+// Example: show the a sidebar
+const Sidebar = () => <p>I am the sidebar component</p>;
+
 // Example: show the "previous" and "next" buttons in the footer
 const Footer = () => <p>I am the footer component</p>;
 
-// Example: Wrap steps in an `<AnimatePresence` from framer-motion 
+// Example: Wrap steps in an `<AnimatePresence` from framer-motion
 const Wrapper = () => <AnimatePresence exitBeforeEnter />;
+
+// Example: Wrap sidebar and steps in a Flexbox
+const SidebarAndStepWrapper = () => <div class="flex" />;
 
 const App = () => {
   return (
-    <Wizard 
+    <Wizard
         startIndex={0}
         header={<Header />}
+        sidebar={<Sidebar />}
         footer={<Footer />}
         wrapper={<Wrapper />}
+        sidebarAndStepWrapper={<SidebarAndStepWrapper />}
       >
       <Step1 />
       <Step2 />
@@ -137,6 +147,7 @@ Used to retrieve all methods and properties related to your wizard. Make sure `W
 | stepCount    | number                      | The total number of steps of the wizard                                                                                                                  |
 | isFirstStep  | boolean                     | Indicate if the current step is the first step (aka no previous step)                                                                                    |
 | isLastStep   | boolean                     | Indicate if the current step is the last step (aka no next step)                                                                                         |
+| stepNames    | { name: string; number: string }[] | An array of objects for each step in the wizard. Each object has a `name` and `number` property corresponding to the step's name and number. |
 |              |
 
 #### Example
