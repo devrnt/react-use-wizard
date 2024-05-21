@@ -23,6 +23,11 @@ export type WizardProps = {
   onStepChange?: (stepIndex: number) => void;
 };
 
+export type StepName = {
+  number: number;
+  name: string;
+};
+
 export type WizardValues = {
   /**
    * Go to the next step
@@ -57,6 +62,10 @@ export type WizardValues = {
   isFirstStep: boolean;
   /** Indicate if the current step is the last step (aka no next step) */
   isLastStep: boolean;
+  /** The labels of each step */
+  stepNames: ({
+    name: any;
+  } | null)[];
 };
 
 /** Console log levels */
