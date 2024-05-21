@@ -7,6 +7,7 @@ import WizardContext from './wizardContext';
 const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
   ({
     header,
+    sidebar,
     footer,
     children,
     onStepChange,
@@ -126,6 +127,11 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
         if (header && !React.isValidElement(header)) {
           logger.log('error', 'Invalid header passed to <Wizard>');
         }
+        // Invalid sidebar element
+        if (sidebar && !React.isValidElement(sidebar)) {
+          logger.log('error', 'Invalid sidebar passed to <Wizard>');
+        }
+
         // Invalid footer element
         if (footer && !React.isValidElement(footer)) {
           logger.log('error', 'Invalid footer passed to <Wizard>');
@@ -133,7 +139,7 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
       }
 
       return reactChildren[activeStep];
-    }, [activeStep, children, header, footer]);
+    }, [activeStep, children, header, sidebar, footer]);
 
     const enhancedActiveStepContent = React.useMemo(
       () =>
@@ -146,6 +152,7 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
     return (
       <WizardContext.Provider value={wizardValue}>
         {header}
+        {sidebar}
         {enhancedActiveStepContent}
         {footer}
       </WizardContext.Provider>

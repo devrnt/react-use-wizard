@@ -3,12 +3,14 @@ export type Handler = (() => Promise<void>) | (() => void) | null;
 export type WizardProps = {
   /** Optional header that is shown above the active step */
   header?: React.ReactNode;
+  /** Optional sidebar that is shown before the active step */
+  sidebar?: React.ReactNode;
   /** Optional footer that is shown below the active step */
   footer?: React.ReactNode;
   /** Optional start index @default 0 */
   startIndex?: number;
   /**
-   * Optional wrapper that is exclusively wrapped around the active step component. It is not wrapped around the `header` and `footer`
+   * Optional wrapper that is exclusively wrapped around the active step component. It is not wrapped around the `header`, `sidebar` and `footer`
    * @example With `framer-motion` - `<AnimatePresence />`
    * ```jsx
    * <Wizard wrapper={<AnimatePresence exitBeforeEnter />}>
