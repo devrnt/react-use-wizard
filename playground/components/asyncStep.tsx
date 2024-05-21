@@ -2,11 +2,11 @@ import { styled } from 'goober';
 import * as React from 'react';
 
 import { useWizard } from '../../dist';
+import { BaseWizardStep } from '../../dist/types';
 import { useMockMutation } from '../hooks';
 
-type Props = {
-  number: number;
-  name?: string;
+type Props = BaseWizardStep & {
+  content: string;
 };
 
 const MOCK = [

@@ -33,10 +33,12 @@ export type WizardProps = {
   onStepChange?: (stepIndex: number) => void;
 };
 
-export type StepName = {
-  number: number;
-  name: string;
-};
+export interface BaseWizardStep {
+  /** The step number */
+  number?: number;
+  /** The step name */
+  name?: string;
+}
 
 export type WizardValues = {
   /**
@@ -73,7 +75,7 @@ export type WizardValues = {
   /** Indicate if the current step is the last step (aka no next step) */
   isLastStep: boolean;
   /** The labels of each step */
-  stepNames: StepName[];
+  steps: BaseWizardStep[];
 };
 
 /** Console log levels */

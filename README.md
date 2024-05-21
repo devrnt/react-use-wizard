@@ -147,7 +147,7 @@ Used to retrieve all methods and properties related to your wizard. Make sure `W
 | stepCount    | number                      | The total number of steps of the wizard                                                                                                                  |
 | isFirstStep  | boolean                     | Indicate if the current step is the first step (aka no previous step)                                                                                    |
 | isLastStep   | boolean                     | Indicate if the current step is the last step (aka no next step)                                                                                         |
-| stepNames    | { name: string; number: string }[] | An array of objects for each step in the wizard. Each object has a `name` and `number` property corresponding to the step's name and number. |
+| steps    | { name?: string; number?: string }[] | An array of objects for each step in the wizard. Each object has a `name` and `number` property corresponding to the step's name and number. |
 |              |
 
 #### Example

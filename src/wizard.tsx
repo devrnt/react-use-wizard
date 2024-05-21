@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import * as logger from './logger';
-import { Handler, StepName, WizardProps } from './types';
+import { BaseWizardStep, Handler, WizardProps } from './types';
 import WizardContext from './wizardContext';
 
 const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
@@ -22,7 +22,7 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
     const nextStepHandler = React.useRef<Handler>(() => {});
     const stepCount = React.Children.toArray(children).length;
     const stepsArray = React.Children.toArray(children);
-    const stepNames = stepsArray
+    const steps = stepsArray
       .map((child) => {
         if (React.isValidElement(child)) {
           const number = child.props.number;
@@ -32,7 +32,7 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
         }
         return null;
       })
-      .filter(Boolean) as StepName[];
+      .filter(Boolean) as BaseWizardStep[];
 
     hasNextStep.current = activeStep < stepCount - 1;
     hasPreviousStep.current = activeStep > 0;
@@ -110,7 +110,7 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
         isFirstStep: !hasPreviousStep.current,
         isLastStep: !hasNextStep.current,
         goToStep,
-        stepNames,
+        steps,
       }),
       [
         doNextStep,
@@ -119,7 +119,7 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
         activeStep,
         stepCount,
         goToStep,
-        stepNames,
+        steps,
       ],
     );
 

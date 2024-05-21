@@ -27,18 +27,18 @@ export const Nav = styled('nav')`
 `;
 
 const Sidebar: React.FC = () => {
-  const { activeStep, stepCount, goToStep, stepNames } = useWizard();
+  const { activeStep, stepCount, goToStep, steps } = useWizard();
 
   return (
     <Nav>
       {stepCount > 0 && (
         <ul>
-          {stepNames.map((stepName, index) => (
+          {steps.map((stepName, index) => (
             <li key={index}>
               <Button
-                label={stepName.name}
-                onClick={() => goToStep(stepName.number - 1)}
-                disabled={stepName.number - 1 > activeStep}
+                label={stepName.name || `Step ${stepName.number}`}
+                onClick={() => goToStep(index)}
+                disabled={index > activeStep}
               >
                 {stepName.name}
               </Button>
