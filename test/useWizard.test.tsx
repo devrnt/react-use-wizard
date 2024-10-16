@@ -135,11 +135,13 @@ describe('useWizard', () => {
   });
 
   test('should go to given step index', async () => {
-    const { result } = renderUseWizardHook();
+    const { result, waitForNextUpdate } = renderUseWizardHook();
 
     act(() => {
       result.current.goToStep(1);
     });
+
+    await waitForNextUpdate();
 
     expect(result.current.activeStep).toBe(1);
     expect(result.current.isFirstStep).toBe(false);
@@ -147,11 +149,13 @@ describe('useWizard', () => {
   });
 
   test('should go to given step index', async () => {
-    const { result } = renderUseWizardHook(1);
+    const { result, waitForNextUpdate } = renderUseWizardHook(1);
 
     act(() => {
       result.current.goToStep(0);
     });
+
+    await waitForNextUpdate();
 
     expect(result.current.activeStep).toBe(0);
     expect(result.current.isFirstStep).toBe(true);
@@ -160,12 +164,14 @@ describe('useWizard', () => {
 
   test('should go to given step index and not invoke `handleStep` handler', async () => {
     const handler = jest.fn();
-    const { result } = renderUseWizardHook();
+    const { result, waitForNextUpdate } = renderUseWizardHook();
 
     act(() => {
       result.current.handleStep(handler);
       result.current.goToStep(1);
     });
+
+    await waitForNextUpdate();
 
     expect(handler).not.toBeCalled();
     expect(result.current.activeStep).toBe(1);
@@ -174,12 +180,13 @@ describe('useWizard', () => {
   });
 
   test('should not go to given step index when out of boundary', async () => {
-    const { result } = renderUseWizardHook();
+    const { result, waitForNextUpdate } = renderUseWizardHook();
 
     try {
       act(() => {
         result.current.goToStep(2);
       });
+      await waitForNextUpdate();
     } catch (error) {
       expect(result.current.activeStep).toBe(0);
       expect(result.current.isFirstStep).toBe(true);
@@ -249,21 +256,24 @@ describe('useWizard', () => {
     expect(result.current.stepCount).toBe(4);
   });
 
-  test('should go to step index of dynamic step', () => {
+  test('should go to step index of dynamic step', async () => {
     const steps = ['one', 'two', 'three'];
 
-    const { result, rerender } = renderHook(() => useWizard(), {
-      initialProps: {
-        startIndex: 0,
+    const { result, rerender, waitForNextUpdate } = renderHook(
+      () => useWizard(),
+      {
+        initialProps: {
+          startIndex: 0,
+        },
+        wrapper: ({ children, startIndex }) => (
+          <Wizard startIndex={startIndex}>
+            {steps.map((step) => (
+              <p key={step}>{children}</p>
+            ))}
+          </Wizard>
+        ),
       },
-      wrapper: ({ children, startIndex }) => (
-        <Wizard startIndex={startIndex}>
-          {steps.map((step) => (
-            <p key={step}>{children}</p>
-          ))}
-        </Wizard>
-      ),
-    });
+    );
 
     steps.push('four');
     rerender();
@@ -271,6 +281,8 @@ describe('useWizard', () => {
     act(() => {
       result.current.goToStep(3);
     });
+
+    await waitForNextUpdate();
 
     expect(result.current.activeStep).toBe(3);
     expect(result.current.isFirstStep).toBe(false);
@@ -310,22 +322,29 @@ describe('useWizard', () => {
 
     test('should invoke onStepChange when previousStep is called', async () => {
       const onStepChange = jest.fn();
-      const { result } = renderUseWizardHook(onStepChange, 1);
+      const { result, waitForNextUpdate } = renderUseWizardHook(
+        onStepChange,
+        1,
+      );
 
       act(() => {
         result.current.previousStep();
       });
+
+      await waitForNextUpdate();
 
       expect(onStepChange).toHaveBeenCalledWith(0);
     });
 
     test('should invoke onStepChange when goToStep is called', async () => {
       const onStepChange = jest.fn();
-      const { result } = renderUseWizardHook(onStepChange);
+      const { result, waitForNextUpdate } = renderUseWizardHook(onStepChange);
 
       act(() => {
         result.current.goToStep(1);
       });
+
+      await waitForNextUpdate();
 
       expect(onStepChange).toHaveBeenCalledWith(1);
     });
