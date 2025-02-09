@@ -1,17 +1,19 @@
 import * as React from 'react';
 
 import * as logger from './logger';
-import { Handler, WizardProps } from './types';
+import { BaseWizardStep, Handler, WizardProps } from './types';
 import WizardContext from './wizardContext';
 
 const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
   ({
     header,
+    sidebar,
     footer,
     children,
     onStepChange,
     wrapper: Wrapper,
     startIndex = 0,
+    sidebarAndStepWrapper: SidebarAndStepWrapper,
   }) => {
     const [activeStep, setActiveStep] = React.useState(startIndex);
     const [isLoading, setIsLoading] = React.useState(false);
@@ -19,6 +21,18 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
     const hasPreviousStep = React.useRef(false);
     const nextStepHandler = React.useRef<Handler>(() => {});
     const stepCount = React.Children.toArray(children).length;
+    const stepsArray = React.Children.toArray(children);
+    const steps = stepsArray
+      .map((child) => {
+        if (React.isValidElement(child)) {
+          const number = child.props.number;
+          const name = child.props.name || `Step ${number}`;
+
+          return { name, number };
+        }
+        return null;
+      })
+      .filter(Boolean) as BaseWizardStep[];
 
     hasNextStep.current = activeStep < stepCount - 1;
     hasPreviousStep.current = activeStep > 0;
@@ -96,6 +110,7 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
         isFirstStep: !hasPreviousStep.current,
         isLastStep: !hasNextStep.current,
         goToStep,
+        steps,
       }),
       [
         doNextStep,
@@ -104,6 +119,7 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
         activeStep,
         stepCount,
         goToStep,
+        steps,
       ],
     );
 
@@ -126,6 +142,11 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
         if (header && !React.isValidElement(header)) {
           logger.log('error', 'Invalid header passed to <Wizard>');
         }
+        // Invalid sidebar element
+        if (sidebar && !React.isValidElement(sidebar)) {
+          logger.log('error', 'Invalid sidebar passed to <Wizard>');
+        }
+
         // Invalid footer element
         if (footer && !React.isValidElement(footer)) {
           logger.log('error', 'Invalid footer passed to <Wizard>');
@@ -133,7 +154,7 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
       }
 
       return reactChildren[activeStep];
-    }, [activeStep, children, header, footer]);
+    }, [activeStep, children, header, sidebar, footer]);
 
     const enhancedActiveStepContent = React.useMemo(
       () =>
@@ -143,10 +164,33 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
       [Wrapper, activeStepContent],
     );
 
+    const enhancedActiveStepContentWithSidebar = React.useMemo(
+      () =>
+        SidebarAndStepWrapper ? (
+          React.cloneElement(SidebarAndStepWrapper, {
+            children: (
+              <>
+                {sidebar}
+                {enhancedActiveStepContent}
+              </>
+            ),
+          })
+        ) : (
+          <>
+            {sidebar}
+            {enhancedActiveStepContent}
+          </>
+        ),
+      [SidebarAndStepWrapper, sidebar, enhancedActiveStepContent],
+    );
+
     return (
       <WizardContext.Provider value={wizardValue}>
         {header}
-        {enhancedActiveStepContent}
+        {sidebar
+          ? enhancedActiveStepContentWithSidebar
+          : enhancedActiveStepContent}
+
         {footer}
       </WizardContext.Provider>
     );

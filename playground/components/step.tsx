@@ -2,9 +2,9 @@ import { styled } from 'goober';
 import * as React from 'react';
 
 import { useWizard } from '../../dist';
+import { BaseWizardStep } from '../../dist/types';
 
-type Props = {
-  number: number;
+type Props = BaseWizardStep & {
   withCallback?: boolean;
 };
 
