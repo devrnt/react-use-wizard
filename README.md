@@ -126,18 +126,19 @@ Used to retrieve all methods and properties related to your wizard. Make sure `W
 
 #### Methods
 
-| name         | type                        | description                                                                                                                                              |
-| ------------ | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| nextStep     | () => Promise<void>         | Go to the next step                                                                                                                                      |
-| previousStep | () => void                  | Go to the previous step index                                                                                                                            |
-| goToStep     | (stepIndex: number) => void | Go to the given step index                                                                                                                               |
-| handleStep   | (handler: Handler) => void  | Attach a callback that will be called when calling `nextStep`. `handler` can be either sync or async                                                     |
-| isLoading    | boolean                     | \* Will reflect the handler promise state: will be `true` if the handler promise is pending and `false` when the handler is either fulfilled or rejected |
-| activeStep   | number                      | The current active step of the wizard                                                                                                                    |
-| stepCount    | number                      | The total number of steps of the wizard                                                                                                                  |
-| isFirstStep  | boolean                     | Indicate if the current step is the first step (aka no previous step)                                                                                    |
-| isLastStep   | boolean                     | Indicate if the current step is the last step (aka no next step)                                                                                         |
-|              |
+| name                | type                        | description                                                                                                                                              |
+| ------------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| nextStep            | () => Promise<void>         | Go to the next step                                                                                                                                      |
+| previousStep        | () => void                  | Go to the previous step index                                                                                                                            |
+| goToStep            | (stepIndex: number) => void | Go to the given step index                                                                                                                               |
+| handleStep          | (handler: Handler) => void  | Attach a callback that will be called when calling `nextStep`. `handler` can be either sync or async                                                     |
+| handlePreviousStep  | (handler: Handler) => void  | Attach a callback that will be called when calling `previousStep`. `handler` can be either sync or async                                                 |
+| handleGoToStep      | (handler: Handler) => void  | Attach a callback that will be called when calling `nextGoToStep`. `handler` can be either sync or async                                                 |
+| isLoading           | boolean                     | \* Will reflect the handler promise state: will be `true` if the handler promise is pending and `false` when the handler is either fulfilled or rejected |
+| activeStep          | number                      | The current active step of the wizard                                                                                                                    |
+| stepCount           | number                      | The total number of steps of the wizard                                                                                                                  |
+| isFirstStep         | boolean                     | Indicate if the current step is the first step (aka no previous step)                                                                                    |
+| isLastStep          | boolean                     | Indicate if the current step is the last step (aka no next step)                                                                                         |
 
 #### Example
 

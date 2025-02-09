@@ -29,17 +29,27 @@ export type WizardValues = {
   /**
    * Go to the previous step
    */
-  previousStep: () => void;
+  previousStep: () => Promise<void>;
   /**
    * Go to the given step index
    * @param stepIndex The step index, starts at 0
    */
-  goToStep: (stepIndex: number) => void;
+  goToStep: (stepIndex: number) => Promise<void>;
   /**
    * Attach a callback that will be called when calling `nextStep()`
    * @param handler Can be either sync or async
    */
   handleStep: (handler: Handler) => void;
+  /**
+   * Attach a callback that will be called when calling `previousStep()`
+   * @param handler Can be either sync or async
+   */
+  handlePreviousStep: (handler: Handler) => void;
+  /**
+   * Attach a callback that will be called when calling `goToStep()`
+   * @param handler Can be either sync or async
+   */
+  handleGoToStep: (handler: Handler) => void;
   /**
    * Indicate the current state of the handler
    *
